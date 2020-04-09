@@ -5,16 +5,16 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
   public bool isPlay;
-  public bool isInstructions;
+  public bool isQuit;
 
   void OnMouseUp(){
   	if(isPlay)
   	{
   		Application.LoadLevel(1);
   	}
-  	// if(isInstructions)
-  	// {
-  	// 	Application.Quit();
-  	// }
-  } 
+  	if(isQuit)
+  	{
+  		Application.Quit();
+  	}
+  }
 }
