@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
+    public GameObject pausePanel;
+
     // Start is called before the first frame update
     void Start()
     {
       Time.timeScale = 1;
+      pausePanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -16,14 +19,16 @@ public class UIManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.P))
         {
           // pause if game is running
-          if(Time.timeScale ==1 )
+          if(!pausePanel.activeInHierarchy)
           {
             Time.timeScale = 0;
+            pausePanel.SetActive(true);
           }
           // unpause if game is currently paused
-          else if (Time.timeScale == 0)
+          else
           {
             Time.timeScale = 1;
+            pausePanel.SetActive(false);
           }
         }
     }
