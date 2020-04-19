@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class PuppyDragAndDrop : MonoBehaviour
 {
-    bool canMove;
-    bool dragging;
-    Collider2D collider;
-    Vector2 origPos;
-    bool collided;
-    Collision2D obj;
-
     private float startPosX;
     private float startPosY;
     private bool isBeingHeld = false;
