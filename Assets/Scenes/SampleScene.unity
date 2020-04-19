@@ -390,6 +390,7 @@ MonoBehaviour:
   playButton: {fileID: 1916294737}
   restartButton: {fileID: 547371164}
   mainMenuButton: {fileID: 1645977139}
+  backgroundAudio: {fileID: 2091481628}
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -2225,7 +2226,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
