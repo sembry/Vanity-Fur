@@ -6,6 +6,8 @@ Vanity Fur is a time and resource management game modeled after the likes of Din
 
 **Art credits:**
 
+**Audio credits:** Background music from [Bensound](https://www.bensound.com/royalty-free-music/track/cute)
+
 ## Concept Statement
 The goal is to manage and build your puppy spa. You begin with a simple spa. You will have to manage customers to satisfy their needs by moving them between stations. Their satisfaction is marked by their happiness meters. You can earn money and use that to upgrade your amenities. Additionally, there are levels where within a certain time frame the player needs to make a fixed revenue. Players have two sources of motivation - improving and designing their spas and levelling up. This game will be fun because players have to strategize how to best coordinate their customers to optimize satisfaction. They also have a monetary score to keep track off. They need to make decisions regarding the return on investments on purchases that could improve services and lead to profit but will have high up-front costs.
 
