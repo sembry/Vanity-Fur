@@ -9,6 +9,7 @@ public class PuppyDragAndDrop : MonoBehaviour
     private bool isBeingHeld = false;
 
     private void OnMouseDown() {
+        // If clicked, update bool + get position
         if(Input.GetMouseButtonDown(0)) {
             Vector3 mousePos;
             mousePos = Input.mousePosition;
@@ -22,13 +23,13 @@ public class PuppyDragAndDrop : MonoBehaviour
     }
 
     private void OnMouseUp() {
+        // If unclicked, update bool
         isBeingHeld = false;
     }
 
-
-    // Update is called once per frame
     void Update()
     {
+        // While clicked, update the position
         if(isBeingHeld == true) {
             Vector3 mousePos;
             mousePos = Input.mousePosition;
