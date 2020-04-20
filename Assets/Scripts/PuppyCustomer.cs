@@ -4,51 +4,30 @@ using UnityEngine;
 
 public class PuppyCustomer : MonoBehaviour
 {
-    // indicate which services the puppy wants
-    public bool treatStand;
-    public bool bath;
-    public bool groomStation;
-    public bool massage;
+    // a list representing what stations the puppy wants to visit
+    // each integer will correspond to a specific station
+    // a HashSet is used to ensure that there are no duplicate station requests
+    public HashSet<int> stations = new HashSet<int>();
 
     // total money customer has spent
     public int balance;
 
-    // used to randomly decide whether the puppy wants each treatment
-    private int rand;
+    // an integer describing how many stations the puppy wants to visit
+    private int stationsWanted;
 
     public PuppyCustomer()
     {
       // to begin with the customer has spent $0
       balance = 0;
 
-      // this will decide if the puppy will want each individual service
-      rand = Random.Range(0,2);
-      if(rand == 1) {
-        treatStand = true;
-      } else {
-        treatStand = false;
+      // randomly generate the number of stations the puppy wants to visit
+      stationsWanted = Random.Range(1,5);
+
+      // fill the set to represent what services they want randomly, no repeats
+      while (stations.Count <= stationsWanted)
+      {
+        stations.Add(Random.Range(1,5));
       }
 
-      // the same process is executed for each service
-      rand = Random.Range(0,2);
-      if(rand == 1) {
-        bath = true;
-      } else {
-        bath = false;
-      }
-
-      rand = Random.Range(0,2);
-      if(rand == 1) {
-        groomStation = true;
-      } else {
-        groomStation = false;
-      }
-
-      rand = Random.Range(0,2);
-      if(rand == 1) {
-        massage = true;
-      } else {
-        massage = false;
-      }
     }
 }
