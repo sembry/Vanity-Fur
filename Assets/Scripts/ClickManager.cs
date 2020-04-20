@@ -18,8 +18,12 @@ public class ClickManager : MonoBehaviour
     private Vector3 pCashPos = new Vector3(3.59f, -1.43f, 0);
     private Vector3 dCashPos = new Vector3(5.13f, -2.11f, 0);
 
+    private bool bathTaken = false;
+    private bool haircutTaken = false;
+    private bool massageTaken = false;
+    private bool cashTaken = false;
+    private bool newMachine = false;
     private bool isBeingHeld = false;
-    private bool snapBack = false;
 
     void Start() {
         player = GameObject.Find("Player");
@@ -33,33 +37,60 @@ public class ClickManager : MonoBehaviour
         if(Input.GetMouseButtonUp(0)) {
             if(isBeingHeld) {
                 isBeingHeld = false;
-                snapBack = false;
-                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                newMachine = false;
                 Collider2D clickedCollider = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
-                Debug.Log(clickedCollider.name);
                 switch(clickedCollider.name) {
                     case "Bath":
-                        puppyPos = dBathPos;
+                        if(!bathTaken) {
+                            newMachine = true;
+                            puppyPos = dBathPos;
+                            bathTaken = true;
+                        }
                         break;
                     case "Haircut":
-                        puppyPos = dHaircutPos;
+                        if(!haircutTaken) {
+                            newMachine = true;
+                            puppyPos = dHaircutPos;
+                            haircutTaken = true;
+                        }
                         break;
                     case "Massage":
-                        puppyPos = dMassagePos;
+                        if(!massageTaken) {
+                            newMachine = true;
+                            puppyPos = dMassagePos;
+                            massageTaken = true;
+                        }
                         break;
                     case "Cash":
-                        puppyPos = dCashPos;
-                        break;
-                    default:
-                        snapBack = true;
+                        if(!cashTaken) {
+                            newMachine = true;
+                            puppyPos = dCashPos;
+                            cashTaken = true;
+                        }
                         break;
                 }
 
-                if(snapBack) {
-                    westie.GetComponent<PuppyDragAndDrop>().snapBack = true;
+                if(!newMachine) {
+                    // westie.GetComponent<PuppyDragAndDrop>().snapBack = true;
                 }
                 else {
+                    switch(westie.GetComponent<PuppyDragAndDrop>().machine) {
+                        case "Bath":
+                            bathTaken = false;
+                            break;
+                        case "Haircut":
+                            haircutTaken = false;
+                            break;
+                        case "Massage":
+                            massageTaken = false;
+                            break;
+                        case "Cash":
+                            cashTaken = false;
+                            break;
+                    }
+
+                    westie.GetComponent<PuppyDragAndDrop>().machine = clickedCollider.name;
                     westie.GetComponent<PuppyDragAndDrop>().moveToPos = puppyPos;
                 }
             }

@@ -8,6 +8,7 @@ public class PuppyDragAndDrop : MonoBehaviour
     public float startPosY;
     public bool isBeingHeld = false;
     public bool snapBack = false;
+    public string machine = "";
 
     public Vector3 moveToPos;
 
