@@ -20,10 +20,6 @@ public class PuppyDragAndDrop : MonoBehaviour
         if(isBeingHeld) {
             transform.localPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - startPos;
         }
-        // If mouse released, stop following the mouse
-        if(Input.GetMouseButtonUp(0) && isBeingHeld) {
-            isBeingHeld = false;
-        }
     }
 
     // When starting to drag, update variables
@@ -34,6 +30,7 @@ public class PuppyDragAndDrop : MonoBehaviour
 
     // When drag ends, update variables 
     public void endDrag(Vector3 machinePos, string machineName) {
+    	isBeingHeld = false;
         previousPos = machinePos;
         transform.position = previousPos;
         machine = machineName;
