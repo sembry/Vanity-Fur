@@ -17,7 +17,7 @@ public class EnterScene : MonoBehaviour
         transform.position = new Vector3(10f, -3.75f, 0);
         script = GetComponent<PuppyDragAndDrop>();
 
-        // Check for a seat, go to it, wait, or leave if there's no space
+        // Check for a seat, and go to it or leave if there's no space
         int check = ChooseSeat.checkSeat();
         switch(check) {
             case 1:
@@ -46,6 +46,7 @@ public class EnterScene : MonoBehaviour
         Destroy(this);
     }
 
+    // Moves to the chair and then destroys the script
     void Update() {
         if(transform.position.x > moveToPos.x) {
             transform.position = Vector2.MoveTowards(transform.position, moveToPos, 3f * Time.deltaTime);

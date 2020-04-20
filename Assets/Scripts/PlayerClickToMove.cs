@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Handles movement for the player
 public class PlayerClickToMove : MonoBehaviour
 {
     private Vector3 moveToPos;
@@ -11,17 +12,17 @@ public class PlayerClickToMove : MonoBehaviour
         moveToPos = transform.position;
     }
 
+    // Move towards new location
     void Update() {
         transform.position = Vector2.MoveTowards(transform.position, moveToPos, 3f * Time.deltaTime);
     }
 
-    // Getter & setter functions
+    // When move starts, update variables
     public void startMove(Vector3 pos) {
-        if(canMove) {
-    	   moveToPos = pos;
-        }
+        moveToPos = pos;
     }
 
+    // Getter & setter functions
     public bool getMove() {
         return canMove;
     }

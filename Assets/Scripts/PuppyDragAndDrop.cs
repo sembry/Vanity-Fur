@@ -5,36 +5,34 @@ using UnityEngine;
 // Handles movement for the puppy
 public class PuppyDragAndDrop : MonoBehaviour
 {
-    private float startPosX;
-    private float startPosY;
     private string machine = "";
     private int seat;
 
     private bool isBeingHeld = false;
     private bool canMove = false;
 
-    public Vector3 previousPos;
+    private Vector3 previousPos;
+    private Vector3 startPos;
 
     void Update()
     {
+        // While clicked, follow the mouse
+        if(isBeingHeld) {
+            transform.localPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - startPos;
+        }
+        // If mouse released, stop following the mouse
         if(Input.GetMouseButtonUp(0) && isBeingHeld) {
             isBeingHeld = false;
         }
-        // While clicked, update the position
-        if(isBeingHeld) {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.localPosition = new Vector3(mousePos.x - startPosX, mousePos.y - startPosY, 0);
-        }
     }
 
+    // When starting to drag, update variables
     public void startDrag(Vector3 mousePos) {
-        if(canMove) {
-            isBeingHeld = true;
-            startPosX = mousePos.x - transform.localPosition.x;
-            startPosY = mousePos.y - transform.localPosition.y;
-        }
+        isBeingHeld = true;
+        startPos = mousePos - transform.localPosition;
     }
 
+    // When drag ends, update variables 
     public void endDrag(Vector3 machinePos, string machineName) {
         previousPos = machinePos;
         transform.position = previousPos;
@@ -45,6 +43,7 @@ public class PuppyDragAndDrop : MonoBehaviour
         }
     }
 
+    // If dragged to an invalid location, go back to orig location
     public void sendBack() {
         transform.position = previousPos;
     }
@@ -53,7 +52,7 @@ public class PuppyDragAndDrop : MonoBehaviour
     public string getMachine() {
         return machine;
     }
-    
+
     public void setSeat(int i) {
         seat = i;
     }

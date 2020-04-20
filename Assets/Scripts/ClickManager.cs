@@ -15,8 +15,8 @@ public class ClickManager : MonoBehaviour
 
     private bool isBeingHeld = false;
 
-    // Find the player and its position
     void Start() {
+        // Find the player and its position
         player = GameObject.Find("Player");
         personPos = player.transform.position;
 
@@ -56,10 +56,13 @@ public class ClickManager : MonoBehaviour
                     }
                 }
                 if(col) {
+                    // If you hit a machine
                     if(machineLoc.ContainsKey("d" + col.name)) {
+                        // If it's not taken
                         if(machineTaken[col.name] == false) {
                             machineTaken[col.name] = true;
                             newMachine = true;
+                            // Set previous machine to untaken
                             if(machineTaken.ContainsKey(puppy.GetComponent<PuppyDragAndDrop>().getMachine())) {
                                 machineTaken[puppy.GetComponent<PuppyDragAndDrop>().getMachine()] = false;
                             }
@@ -86,15 +89,20 @@ public class ClickManager : MonoBehaviour
                 col = col_;
                 if(col_.tag == "Puppy") {
                     puppy = col_.gameObject;
-                    puppy.GetComponent<PuppyDragAndDrop>().startDrag(mousePos);
-                    isBeingHeld = true;
+                    if(puppy.GetComponent<PuppyDragAndDrop>().getMove()) {
+                        isBeingHeld = true;
+                        // Send the position to the puppy
+                        puppy.GetComponent<PuppyDragAndDrop>().startDrag(mousePos);
+                    }
                     break;
                 }
             }
             if(col) {
                 // If you hit a machine, send the position back to the player
                 if(machineLoc.ContainsKey("p" + col.name)) {
-                    player.GetComponent<PlayerClickToMove>().startMove(machineLoc["p" + col.name]);
+                    if(player.GetComponent<PlayerClickToMove>().getMove()) {
+                        player.GetComponent<PlayerClickToMove>().startMove(machineLoc["p" + col.name]);
+                    }
                 }
             }
         }
