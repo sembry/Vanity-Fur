@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8292410905041925364}
   - component: {fileID: 8292410905041925363}
   - component: {fileID: 8292410905041925365}
-  - component: {fileID: 3878490551281083586}
   m_Layer: 0
   m_Name: Westie
   m_TagString: Untagged
@@ -141,16 +140,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.62, y: 10.94}
   m_EdgeRadius: 0
---- !u!114 &3878490551281083586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8292410905041925361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d78cbf1aaad4466bbd9dde54b582a2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  balance: 0
