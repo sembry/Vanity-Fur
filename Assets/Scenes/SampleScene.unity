@@ -504,7 +504,7 @@ GameObject:
   - component: {fileID: 806528461}
   m_Layer: 0
   m_Name: Westie
-  m_TagString: Untagged
+  m_TagString: Puppy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -535,11 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7f4b6f021e754ce7831dbb7f053cc8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPosX: 0
-  startPosY: 0
-  isBeingHeld: 0
-  snapBack: 0
-  machine: 
+  done: 0
   moveToPos: {x: 0, y: 0, z: 0}
 --- !u!114 &806528460
 MonoBehaviour:
@@ -724,7 +720,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d960a2ec9531d409ab0f3752d274d5dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveToPos: {x: 0, y: 0, z: 0}
 --- !u!61 &956747051
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -761,6 +756,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1216621668}
   - component: {fileID: 1216621669}
+  - component: {fileID: 1216621671}
   - component: {fileID: 1216621670}
   m_Layer: 0
   m_Name: Cash
@@ -859,6 +855,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.32, y: 2.15}
   m_EdgeRadius: 0
+--- !u!114 &1216621671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216621667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 436820ec64cb04be5bda3d905e357248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1262872475
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,7 +1103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  westie: {fileID: 0}
+  puppy: {fileID: 0}
 --- !u!114 &1645977139 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1101924290041850586, guid: e501a3b54f2de4469862296405098ad5,
@@ -1117,7 +1125,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1698682880}
-  - component: {fileID: 1698682883}
   - component: {fileID: 1698682882}
   - component: {fileID: 1698682881}
   m_Layer: 0
@@ -1217,19 +1224,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1698682883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1698682879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b76bd8fdb6b9946b4b9d93030c49445f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTaken: 0
 --- !u!1 &1717745098
 GameObject:
   m_ObjectHideFlags: 0

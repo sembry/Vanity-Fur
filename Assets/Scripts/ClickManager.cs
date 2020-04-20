@@ -28,7 +28,7 @@ public class ClickManager : MonoBehaviour
     private bool newMachine = false;
     private bool isBeingHeld = false;
 
-    // Find the player and dog and their positions
+    // Find the player and its position
     void Start() {
         player = GameObject.Find("Player");
         personPos = player.transform.position;
