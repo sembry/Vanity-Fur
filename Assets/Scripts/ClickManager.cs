@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -60,19 +60,23 @@ public class ClickManager : MonoBehaviour
                     if(machineLoc.ContainsKey("d" + col.name)) {
                         // If it's not taken
                         if(machineTaken[col.name] == false) {
+                            Debug.Log(col.name);
                             machineTaken[col.name] = true;
                             newMachine = true;
-                            // Set previous machine to untaken
-                            if(machineTaken.ContainsKey(puppy.GetComponent<PuppyDragAndDrop>().getMachine())) {
-                                machineTaken[puppy.GetComponent<PuppyDragAndDrop>().getMachine()] = false;
+                            if(puppy.GetComponent<PuppyDragAndDrop>().getMachine()) {
+                                // Set previous machine to untaken
+                                if(machineTaken.ContainsKey(puppy.GetComponent<PuppyDragAndDrop>().getMachine().name)) {
+                                    machineTaken[puppy.GetComponent<PuppyDragAndDrop>().getMachine().name] = false;
+                                }
                             }
                             // Send the position and machine back to the puppy
-                            puppy.GetComponent<PuppyDragAndDrop>().endDrag(machineLoc["d" + col.name], col.name);
+                            puppy.GetComponent<PuppyDragAndDrop>().endDrag(machineLoc["d" + col.name], col.gameObject);
                         }
                     }
                 }
                 // Otherwise send the same location back
                 if(!newMachine) {
+                    Debug.Log("snapcback");
                     puppy.GetComponent<PuppyDragAndDrop>().sendBack();
                 }
             }
@@ -88,11 +92,10 @@ public class ClickManager : MonoBehaviour
             foreach(Collider2D col_ in clickedCollider) {
                 col = col_;
                 if(col_.tag == "Puppy") {
-                    puppy = col_.gameObject;
-                    if(puppy.GetComponent<PuppyDragAndDrop>().getMove()) {
-                        isBeingHeld = true;
-                        // Send the position to the puppy
+                    if(col_.gameObject.GetComponent<PuppyDragAndDrop>().getMove()) {
+                        puppy = col_.gameObject;
                         puppy.GetComponent<PuppyDragAndDrop>().startDrag(mousePos);
+                        isBeingHeld = true;
                     }
                     break;
                 }
@@ -101,7 +104,7 @@ public class ClickManager : MonoBehaviour
                 // If you hit a machine, send the position back to the player
                 if(machineLoc.ContainsKey("p" + col.name)) {
                     if(player.GetComponent<PlayerClickToMove>().getMove()) {
-                        player.GetComponent<PlayerClickToMove>().startMove(machineLoc["p" + col.name]);
+                        player.GetComponent<PlayerClickToMove>().startMove(machineLoc["p" + col.name], col.gameObject);
                     }
                 }
             }

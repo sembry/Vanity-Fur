@@ -5,7 +5,7 @@ using UnityEngine;
 // Handles movement for the puppy
 public class PuppyDragAndDrop : MonoBehaviour
 {
-    private string machine = "";
+    private GameObject machine;
     private int seat;
 
     private bool isBeingHeld = false;
@@ -20,6 +20,10 @@ public class PuppyDragAndDrop : MonoBehaviour
         if(isBeingHeld) {
             transform.localPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - startPos;
         }
+        // If mouse released, stop following the mouse
+        if(Input.GetMouseButtonUp(0) && isBeingHeld) {
+            isBeingHeld = false;
+        }
     }
 
     // When starting to drag, update variables
@@ -29,11 +33,11 @@ public class PuppyDragAndDrop : MonoBehaviour
     }
 
     // When drag ends, update variables 
-    public void endDrag(Vector3 machinePos, string machineName) {
+    public void endDrag(Vector3 machinePos, GameObject machine_) {
     	isBeingHeld = false;
         previousPos = machinePos;
         transform.position = previousPos;
-        machine = machineName;
+        machine = machine_;
         if(seat != -1) {
             ChooseSeat.leaveSeat(seat);
             seat = -1;
@@ -42,11 +46,12 @@ public class PuppyDragAndDrop : MonoBehaviour
 
     // If dragged to an invalid location, go back to orig location
     public void sendBack() {
+    	isBeingHeld = false;
         transform.position = previousPos;
     }
 
     // Getter & setter functions
-    public string getMachine() {
+    public GameObject getMachine() {
         return machine;
     }
 

@@ -7,6 +7,7 @@ public class PlayerClickToMove : MonoBehaviour
 {
     private Vector3 moveToPos;
     private bool canMove = true;
+    private GameObject machine;
 
     void Start() {
         moveToPos = transform.position;
@@ -18,8 +19,9 @@ public class PlayerClickToMove : MonoBehaviour
     }
 
     // When move starts, update variables
-    public void startMove(Vector3 pos) {
+    public void startMove(Vector3 pos, GameObject machine_) {
         moveToPos = pos;
+        machine = machine_;
     }
 
     // Getter & setter functions
@@ -29,5 +31,9 @@ public class PlayerClickToMove : MonoBehaviour
 
     public void setMove() {
         canMove ^= true;
+    }
+
+    public GameObject getMachine() {
+        return machine;
     }
 }
