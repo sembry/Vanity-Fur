@@ -15,7 +15,7 @@ public class LevelController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      timer -= Time.deltaTime;
+      timer -= (Time.deltaTime) % 60;
       if(timer <= 0f)
       {
         Instantiate(Resources.Load("Westie"), new Vector3(4, -5, 0), Quaternion.identity);
