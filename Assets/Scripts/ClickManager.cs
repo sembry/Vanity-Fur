@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Manages all clicks for movement
 public class ClickManager : MonoBehaviour
 {
     private Vector3 personPos;
@@ -13,11 +14,11 @@ public class ClickManager : MonoBehaviour
     private Vector3 pBathPos = new Vector3(-2.64f, 4.01f, 0);
     private Vector3 dBathPos = new Vector3(-5f, 5f, 0);
     private Vector3 pHaircutPos = new Vector3(1.93f, 3.86f, 0);
-    private Vector3 dHaircutPos = new Vector3(-0.25f, 2f, 0);
+    private Vector3 dHaircutPos = new Vector3(-0.2f, 2f, 0);
     private Vector3 pMassagePos = new Vector3(7.53f, 3.77f, 0);
     private Vector3 dMassagePos = new Vector3(5.5f, 4f, 0);
     private Vector3 pCashPos = new Vector3(3.59f, -1.43f, 0);
-    private Vector3 dCashPos = new Vector3(5.13f, -2.11f, 0);
+    private Vector3 dCashPos = new Vector3(5.7f, 0f, 0);
     private Vector3 dTreatsPos = new Vector3(-4f, -2f, 0);
 
     private bool bathTaken = false;
@@ -157,12 +158,15 @@ public class ClickManager : MonoBehaviour
                 default:
                     if(col) {
                         if(col.tag == "Puppy") {
-                            isBeingHeld = true;
                             puppy = col.gameObject;
-                            puppy.GetComponent<PuppyDragAndDrop>().setHeld(true);
-                            puppy.GetComponent<PuppyDragAndDrop>().setStartPos(mousePos.x - 
-                            puppy.transform.localPosition.x, mousePos.y - 
-                            puppy.transform.localPosition.y);
+                            // check if object is still moving to the seat
+                            if(!puppy.GetComponent<PuppyDragAndDrop>().getMoving()) {
+                                isBeingHeld = true;
+                                puppy.GetComponent<PuppyDragAndDrop>().setHeld(true);
+                                puppy.GetComponent<PuppyDragAndDrop>().setStartPos(mousePos.x - 
+                                puppy.transform.localPosition.x, mousePos.y - 
+                                puppy.transform.localPosition.y);
+                            }
                         }
                     }
                     break;

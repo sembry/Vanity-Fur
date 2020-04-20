@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Static class to keep track of seats
 public class ChooseSeat : MonoBehaviour
 {
-    private bool seat1 = true;
-    private bool seat2 = true;
-    private bool seat3 = true;
+    private static bool seat1 = true;
+    private static bool seat2 = true;
+    private static bool seat3 = true;
 
-    public int checkSeat() {
+    // Check if seat is taken
+    public static int checkSeat() {
     	if(seat1) {
     		seat1 = false;
     		return 1;
@@ -21,10 +23,11 @@ public class ChooseSeat : MonoBehaviour
     		seat3 = false;
     		return 3;
     	}
-    	return -1;
+        return -1;
     }
 
-    public void leaveSeat(int i) {
+    // Free up the seat
+    public static void leaveSeat(int i) {
     	if(i == 1) {
     		seat1 = true;
     	}
