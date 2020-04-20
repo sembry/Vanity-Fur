@@ -4,31 +4,19 @@ using UnityEngine;
 
 public class PuppyDragAndDrop : MonoBehaviour
 {
-    private float startPosX;
-    private float startPosY;
-    private bool isBeingHeld = false;
+    public float startPosX;
+    public float startPosY;
+    public bool isBeingHeld = false;
+    public bool snapBack = false;
 
-    private void OnMouseDown() {
-        // If clicked, update bool + get position
-        if(Input.GetMouseButtonDown(0)) {
-            Vector3 mousePos;
-            mousePos = Input.mousePosition;
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
-            startPosX = mousePos.x - this.transform.localPosition.x;
-            startPosY = mousePos.y - this.transform.localPosition.y;
-
-            isBeingHeld = true;
-        }
-    }
-
-    private void OnMouseUp() {
-        // If unclicked, update bool
-        isBeingHeld = false;
-    }
+    public Vector3 moveToPos;
 
     void Update()
     {
+        if(Input.GetMouseButtonUp(0) && isBeingHeld) {
+            isBeingHeld = false;
+            this.gameObject.transform.localPosition = moveToPos;
+        }
         // While clicked, update the position
         if(isBeingHeld == true) {
             Vector3 mousePos;
