@@ -21,6 +21,7 @@ public class ClickManager : MonoBehaviour
     private Vector3 dCashPos = new Vector3(5.7f, 0f, 0);
     private Vector3 dTreatsPos = new Vector3(-4f, -2f, 0);
 
+    // flag variables
     private bool bathTaken = false;
     private bool haircutTaken = false;
     private bool massageTaken = false;
@@ -54,6 +55,7 @@ public class ClickManager : MonoBehaviour
                         break;
                     }
                 }
+
                 // Check if you hit a machine, if so update its availability
                 switch(name) {
                     case "Bath":
@@ -116,9 +118,11 @@ public class ClickManager : MonoBehaviour
                             treatsTaken = false;
                             break;
                     }
+
                     // Send the position and machine back to the puppy
                     puppy.GetComponent<PuppyDragAndDrop>().setMachine(name);
                     puppy.GetComponent<PuppyDragAndDrop>().setMovePos(puppyPos);
+                    puppy.GetComponent<PuppyDragAndDrop>().setMove();
                     puppy.GetComponent<PuppyDragAndDrop>().changePos();
                 }
             }

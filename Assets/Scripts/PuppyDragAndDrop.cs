@@ -7,10 +7,11 @@ public class PuppyDragAndDrop : MonoBehaviour
 {
     private float startPosX;
     private float startPosY;
-    private bool isBeingHeld = false;
     private string machine = "";
-    public bool done = false;
     private int seat;
+
+    private bool didMove = false;
+    private bool isBeingHeld = false;
     private bool isMoving = true;
 
     private Vector3 seat1 = new Vector3(0f, -3.75f, 0f);
@@ -37,7 +38,7 @@ public class PuppyDragAndDrop : MonoBehaviour
     // tells puppy to snap to a position
     public void changePos() {
         // Check if you are leaving a seat
-        if(seat != -1) {
+        if(seat != -1 && didMove) {
             ChooseSeat.leaveSeat(seat);
             seat = -1;
         }
@@ -76,5 +77,9 @@ public class PuppyDragAndDrop : MonoBehaviour
 
     public bool getMoving() {
         return isMoving;
+    }
+
+    public void setMove() {
+        didMove = true;
     }
 }
