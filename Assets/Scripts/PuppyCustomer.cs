@@ -32,4 +32,5 @@ public class PuppyCustomer : MonoBehaviour
         stations.Add(Random.Range(1,4));
       }
     }
+    
 }
