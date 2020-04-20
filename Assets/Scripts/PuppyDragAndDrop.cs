@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Handles movement for the puppy
 public class PuppyDragAndDrop : MonoBehaviour
 {
     private float startPosX;
@@ -9,6 +10,12 @@ public class PuppyDragAndDrop : MonoBehaviour
     private bool isBeingHeld = false;
     private string machine = "";
     public bool done = false;
+    private int seat;
+    private bool isMoving = true;
+
+    private Vector3 seat1 = new Vector3(0f, -3.75f, 0f);
+    private Vector3 seat2 = new Vector3(-1.6f, -3.75f, 0f);
+    private Vector3 seat3 = new Vector3(-3.2f, -3.75f, 0f);
 
     public Vector3 moveToPos;
 
@@ -23,14 +30,18 @@ public class PuppyDragAndDrop : MonoBehaviour
             mousePos = Input.mousePosition;
             mousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-            this.gameObject.transform.localPosition = new Vector3(mousePos.x - startPosX, 
-                mousePos.y - startPosY, 0);
+            transform.localPosition = new Vector3(mousePos.x - startPosX, mousePos.y - startPosY, 0);
         }
     }
 
     // tells puppy to snap to a position
     public void changePos() {
-        this.gameObject.transform.localPosition = moveToPos;
+        // Check if you are leaving a seat
+        if(seat != -1) {
+            ChooseSeat.leaveSeat(seat);
+            seat = -1;
+        }
+        transform.position = moveToPos;
     }
 
         // Getter & setter functions
@@ -53,5 +64,17 @@ public class PuppyDragAndDrop : MonoBehaviour
 
     public string getMachine() {
         return machine;
+    }
+
+    public void setSeat(int i) {
+        seat = i;
+    }
+
+    public void setMoving() {
+        isMoving = false;
+    }
+
+    public bool getMoving() {
+        return isMoving;
     }
 }
