@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ClickManager : MonoBehaviour
 {
- 	private Vector3 personPos;
+    private Vector3 personPos;
     private Vector3 puppyPos;
     public GameObject player;
     public GameObject puppy;
 
     // position vectors
- 	private Vector3 pBathPos = new Vector3(-2.64f, 4.01f, 0);
+    private Vector3 pBathPos = new Vector3(-2.64f, 4.01f, 0);
     private Vector3 dBathPos = new Vector3(-5.61f, 2.25f, 0);
     private Vector3 pHaircutPos = new Vector3(1.93f, 3.86f, 0);
     private Vector3 dHaircutPos = new Vector3(-0.95f, 0.39f, 0);
@@ -41,10 +41,21 @@ public class ClickManager : MonoBehaviour
             if(isBeingHeld) {
                 isBeingHeld = false;
                 newMachine = false;
-                Collider2D clickedCollider = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                Collider2D[] clickedCollider = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                string name = "";
+                Collider2D col = null;
+            
+                // Array because of overlapping colliders
+                foreach(Collider2D col_ in clickedCollider) {
+                    name = col_.name;
+                    col = col_;
+                    if(col_.tag != "Puppy") {
+                        break;
+                    }
+                }
 
                 // Check if you hit a machine, if so update its availability
-                switch(clickedCollider.name) {
+                switch(name) {
                     case "Bath":
                         if(!bathTaken) {
                             newMachine = true;
@@ -104,9 +115,8 @@ public class ClickManager : MonoBehaviour
                             treatsTaken = false;
                             break;
                     }
-
                     // Send the position and machine back to the puppy
-                    puppy.GetComponent<PuppyDragAndDrop>().setMachine(clickedCollider.name);
+                    puppy.GetComponent<PuppyDragAndDrop>().setMachine(name);
                     puppy.GetComponent<PuppyDragAndDrop>().setMovePos(puppyPos);
                     puppy.GetComponent<PuppyDragAndDrop>().changePos();
                 }
@@ -115,7 +125,7 @@ public class ClickManager : MonoBehaviour
 
         // If you click the mouse
         if(Input.GetMouseButtonDown(0)) {
-        	Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Collider2D[] clickedCollider = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             string name = "";
             Collider2D col = null;
@@ -127,19 +137,19 @@ public class ClickManager : MonoBehaviour
             }
 
             // Check if you hit a machine, if so, update the target position
-    		switch(name) {
-    			case "Bath":
-    				personPos = pBathPos;
-    				break;
-    			case "Haircut":
-    				personPos = pHaircutPos;
-    				break;
-    			case "Massage":
-    				personPos = pMassagePos;
-    				break;
-    			case "Cash":
-    				personPos = pCashPos;
-    				break;
+            switch(name) {
+                case "Bath":
+                    personPos = pBathPos;
+                    break;
+                case "Haircut":
+                    personPos = pHaircutPos;
+                    break;
+                case "Massage":
+                    personPos = pMassagePos;
+                    break;
+                case "Cash":
+                    personPos = pCashPos;
+                    break;
                 // If you click the dog, send it back to the puppy script so they can handle drag
                 default:
                     if(col) {
@@ -153,7 +163,7 @@ public class ClickManager : MonoBehaviour
                         }
                     }
                     break;
-        	}
+            }
             // Send the position back to the player
             player.GetComponent<PlayerClickToMove>().setPos(personPos);
         }
