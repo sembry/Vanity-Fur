@@ -24,15 +24,14 @@ public class PuppyCustomer : MonoBehaviour
     void Start()
     {
       // randomly generate the number of stations the puppy wants to visit
-      stationsWanted = Random.Range(1,4);
+      stationsWanted = Random.Range(1,3);
 
       // fill the set to represent what services they want randomly, no repeats
-      while (stations.Count <= stationsWanted)
+      while (stations.Count < stationsWanted)
       {
         stations.Add(Random.Range(1,4));
       }
 
       Debug.Log(stations);
-
     }
 }
