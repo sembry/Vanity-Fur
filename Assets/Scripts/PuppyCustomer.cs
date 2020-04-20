@@ -19,10 +19,12 @@ public class PuppyCustomer : MonoBehaviour
     {
       // to begin with the customer has spent $0
       balance = 0;
+      Debug.Log("nice");
     }
 
     void Start()
     {
+      Debug.Log("start");
       // randomly generate the number of stations the puppy wants to visit
       stationsWanted = Random.Range(1,3);
 
@@ -32,5 +34,5 @@ public class PuppyCustomer : MonoBehaviour
         stations.Add(Random.Range(1,4));
       }
     }
-    
+
 }
