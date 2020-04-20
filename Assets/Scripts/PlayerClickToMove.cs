@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerClickToMove : MonoBehaviour
 {
-    public Vector3 moveToPos;
+    private Vector3 moveToPos;
 
     void Start() {
         moveToPos = transform.position;
@@ -12,5 +12,10 @@ public class PlayerClickToMove : MonoBehaviour
 
     void Update() {
         transform.position = Vector2.MoveTowards(transform.position, moveToPos, 3f * Time.deltaTime);
+    }
+
+    // Setter function
+    public void setPos(Vector3 pos) {
+    	moveToPos = pos;
     }
 }
