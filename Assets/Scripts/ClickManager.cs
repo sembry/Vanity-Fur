@@ -85,11 +85,11 @@ public class ClickManager : MonoBehaviour
                 }
 
                 if(!newMachine) {
-                    // westie.GetComponent<PuppyDragAndDrop>().snapBack = true;
+                    // do something later
                 }
                 else {
                     // Update the previous machine's availability
-                    switch(westie.GetComponent<PuppyDragAndDrop>().machine) {
+                    switch(westie.GetComponent<PuppyDragAndDrop>().getMachine()) {
                         case "Bath":
                             bathTaken = false;
                             break;
@@ -108,8 +108,8 @@ public class ClickManager : MonoBehaviour
                     }
 
                     // Send the position and machine back to the puppy
-                    westie.GetComponent<PuppyDragAndDrop>().machine = clickedCollider.name;
-                    westie.GetComponent<PuppyDragAndDrop>().moveToPos = puppyPos;
+                    westie.GetComponent<PuppyDragAndDrop>().setMachine(clickedCollider.name);
+                    westie.GetComponent<PuppyDragAndDrop>().setMovePos(puppyPos);
                 }
             }
         }
@@ -142,15 +142,14 @@ public class ClickManager : MonoBehaviour
                 // If you click the dog, send it back to the puppy script so they can handle drag
                 case "Westie":
                     isBeingHeld = true;
-                    westie.GetComponent<PuppyDragAndDrop>().isBeingHeld = true;
-                    westie.GetComponent<PuppyDragAndDrop>().startPosX = mousePos.x - 
-                    westie.transform.localPosition.x;
-                    westie.GetComponent<PuppyDragAndDrop>().startPosY = mousePos.y - 
-                    westie.transform.localPosition.y;
+                    westie.GetComponent<PuppyDragAndDrop>().setHeld(true);
+                    westie.GetComponent<PuppyDragAndDrop>().setStartPos(mousePos.x - 
+                    westie.transform.localPosition.x, mousePos.y - 
+                    westie.transform.localPosition.y);
                     break;
         	}
             // Send the position back to the player
-            player.GetComponent<PlayerClickToMove>().moveToPos = personPos;
+            player.GetComponent<PlayerClickToMove>().setPos(personPos);
         }
     }
 }
