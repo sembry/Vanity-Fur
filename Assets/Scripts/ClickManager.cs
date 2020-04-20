@@ -47,7 +47,6 @@ public class ClickManager : MonoBehaviour
             
                 // Array because of overlapping colliders
                 foreach(Collider2D col_ in clickedCollider) {
-                    Debug.Log(col_.name);
                     name = col_.name;
                     col = col_;
                     if(col_.tag != "Puppy") {

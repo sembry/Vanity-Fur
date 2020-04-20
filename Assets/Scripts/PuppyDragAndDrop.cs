@@ -30,7 +30,6 @@ public class PuppyDragAndDrop : MonoBehaviour
 
     // tells puppy to snap to a position
     public void changePos() {
-        Debug.Log(moveToPos.x + " " + moveToPos.y);
         this.gameObject.transform.position = moveToPos;
     }
 
