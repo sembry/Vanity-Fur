@@ -8,6 +8,7 @@ public class PuppyDragAndDrop : MonoBehaviour
     private float startPosY;
     private bool isBeingHeld = false;
     private string machine = "";
+    public bool done = false;
 
     public Vector3 moveToPos;
 
@@ -15,7 +16,6 @@ public class PuppyDragAndDrop : MonoBehaviour
     {
         if(Input.GetMouseButtonUp(0) && isBeingHeld) {
             isBeingHeld = false;
-            this.gameObject.transform.localPosition = moveToPos;
         }
         // While clicked, update the position
         if(isBeingHeld == true) {
@@ -26,6 +26,11 @@ public class PuppyDragAndDrop : MonoBehaviour
             this.gameObject.transform.localPosition = new Vector3(mousePos.x - startPosX, 
                 mousePos.y - startPosY, 0);
         }
+    }
+
+    // tells puppy to snap to a position
+    public void changePos() {
+        this.gameObject.transform.localPosition = moveToPos;
     }
 
         // Getter & setter functions

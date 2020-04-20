@@ -85,7 +85,7 @@ public class ClickManager : MonoBehaviour
                 }
 
                 if(!newMachine) {
-                    // do something later
+                    westie.GetComponent<PuppyDragAndDrop>().changePos();
                 }
                 else {
                     // Update the previous machine's availability
@@ -110,6 +110,7 @@ public class ClickManager : MonoBehaviour
                     // Send the position and machine back to the puppy
                     westie.GetComponent<PuppyDragAndDrop>().setMachine(clickedCollider.name);
                     westie.GetComponent<PuppyDragAndDrop>().setMovePos(puppyPos);
+                    westie.GetComponent<PuppyDragAndDrop>().changePos();
                 }
             }
         }
