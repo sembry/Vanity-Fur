@@ -19,14 +19,17 @@ public class PuppyCustomer : MonoBehaviour
     {
       // to begin with the customer has spent $0
       balance = 0;
+    }
 
+    void Start()
+    {
       // randomly generate the number of stations the puppy wants to visit
-      stationsWanted = Random.Range(1,5);
+      stationsWanted = Random.Range(1,4);
 
       // fill the set to represent what services they want randomly, no repeats
       while (stations.Count <= stationsWanted)
       {
-        stations.Add(Random.Range(1,5));
+        stations.Add(Random.Range(1,4));
       }
 
     }
