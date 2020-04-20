@@ -9,6 +9,7 @@ public class ClickManager : MonoBehaviour
     public GameObject player;
     public GameObject westie;
 
+    // position vectors
  	private Vector3 pBathPos = new Vector3(-2.64f, 4.01f, 0);
     private Vector3 dBathPos = new Vector3(-5.61f, 2.25f, 0);
     private Vector3 pHaircutPos = new Vector3(1.93f, 3.86f, 0);
@@ -17,14 +18,17 @@ public class ClickManager : MonoBehaviour
     private Vector3 dMassagePos = new Vector3(4.72f, 1.77f, 0);
     private Vector3 pCashPos = new Vector3(3.59f, -1.43f, 0);
     private Vector3 dCashPos = new Vector3(5.13f, -2.11f, 0);
+    private Vector3 dTreatsPos = new Vector3(-7.85f, -4.27f, 0);
 
     private bool bathTaken = false;
     private bool haircutTaken = false;
     private bool massageTaken = false;
     private bool cashTaken = false;
+    private bool treatsTaken = false;
     private bool newMachine = false;
     private bool isBeingHeld = false;
 
+    // Find the player and dog and their positions
     void Start() {
         player = GameObject.Find("Player");
         westie = GameObject.Find("Westie");
@@ -34,12 +38,14 @@ public class ClickManager : MonoBehaviour
 
     void Update()
     {
+        // If you unclick the mouse
         if(Input.GetMouseButtonUp(0)) {
             if(isBeingHeld) {
                 isBeingHeld = false;
                 newMachine = false;
                 Collider2D clickedCollider = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
+                // Check if you hit a machine, if so update its availability
                 switch(clickedCollider.name) {
                     case "Bath":
                         if(!bathTaken) {
@@ -69,12 +75,20 @@ public class ClickManager : MonoBehaviour
                             cashTaken = true;
                         }
                         break;
+                    case "Treats":
+                        if(!treatsTaken) {
+                            newMachine = true;
+                            puppyPos = dTreatsPos;
+                            treatsTaken = true;
+                        }
+                        break;
                 }
 
                 if(!newMachine) {
                     // westie.GetComponent<PuppyDragAndDrop>().snapBack = true;
                 }
                 else {
+                    // Update the previous machine's availability
                     switch(westie.GetComponent<PuppyDragAndDrop>().machine) {
                         case "Bath":
                             bathTaken = false;
@@ -88,27 +102,30 @@ public class ClickManager : MonoBehaviour
                         case "Cash":
                             cashTaken = false;
                             break;
+                        case "Treats":
+                            treatsTaken = false;
+                            break;
                     }
 
+                    // Send the position and machine back to the puppy
                     westie.GetComponent<PuppyDragAndDrop>().machine = clickedCollider.name;
                     westie.GetComponent<PuppyDragAndDrop>().moveToPos = puppyPos;
                 }
             }
         }
 
+        // If you click the mouse
         if(Input.GetMouseButtonDown(0)) {
         	Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        	// Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
-
-        	// RaycastHit2D hit = Physics2D.Raycast(mousePos2D, Vector2.zero);
-
             Collider2D[] clickedCollider = Physics2D.OverlapPointAll(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             string name = "";
             
+            // Array in case of overlapping colliders
             foreach(Collider2D col in clickedCollider) {
                 name = col.name;
             }
 
+            // Check if you hit a machine, if so, update the target position
     		switch(name) {
     			case "Bath":
     				personPos = pBathPos;
@@ -122,6 +139,7 @@ public class ClickManager : MonoBehaviour
     			case "Cash":
     				personPos = pCashPos;
     				break;
+                // If you click the dog, send it back to the puppy script so they can handle drag
                 case "Westie":
                     isBeingHeld = true;
                     westie.GetComponent<PuppyDragAndDrop>().isBeingHeld = true;
@@ -131,6 +149,7 @@ public class ClickManager : MonoBehaviour
                     westie.transform.localPosition.y;
                     break;
         	}
+            // Send the position back to the player
             player.GetComponent<PlayerClickToMove>().moveToPos = personPos;
         }
     }
