@@ -14,7 +14,6 @@ public class EnterScene : MonoBehaviour
     PuppyDragAndDrop script;
 
     void Start() {
-
         transform.position = new Vector3(10f, -3.75f, 0);
         script = GetComponent<PuppyDragAndDrop>();
 
@@ -24,17 +23,17 @@ public class EnterScene : MonoBehaviour
             case 1:
                 moveToPos = seat1;
                 script.setSeat(1);
-                script.setMovePos(seat1);
+                script.setPreviousPos(seat1);
                 break;
             case 2:
                 moveToPos = seat2;
                 script.setSeat(2);
-                script.setMovePos(seat2);
+                script.setPreviousPos(seat2);
                 break;
             case 3:
                 moveToPos = seat3;
                 script.setSeat(3);
-                script.setMovePos(seat3);
+                script.setPreviousPos(seat3);
                 break;
             default:
                 Destroy(gameObject);
@@ -42,13 +41,17 @@ public class EnterScene : MonoBehaviour
         }
     }
 
+    void finished() {
+        script.setMove();
+        Destroy(this);
+    }
+
     void Update() {
         if(transform.position.x > moveToPos.x) {
             transform.position = Vector2.MoveTowards(transform.position, moveToPos, 3f * Time.deltaTime);
         }
         else {
-        	script.setMoving();
-            Destroy(this);
+        	finished();
         }
     }
 }

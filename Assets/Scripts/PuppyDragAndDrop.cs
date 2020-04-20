@@ -10,15 +10,10 @@ public class PuppyDragAndDrop : MonoBehaviour
     private string machine = "";
     private int seat;
 
-    private bool didMove = false;
     private bool isBeingHeld = false;
-    private bool isMoving = true;
+    private bool canMove = false;
 
-    private Vector3 seat1 = new Vector3(0f, -3.75f, 0f);
-    private Vector3 seat2 = new Vector3(-1.6f, -3.75f, 0f);
-    private Vector3 seat3 = new Vector3(-3.2f, -3.75f, 0f);
-
-    public Vector3 moveToPos;
+    public Vector3 previousPos;
 
     void Update()
     {
@@ -26,60 +21,52 @@ public class PuppyDragAndDrop : MonoBehaviour
             isBeingHeld = false;
         }
         // While clicked, update the position
-        if(isBeingHeld == true) {
-            Vector3 mousePos;
-            mousePos = Input.mousePosition;
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-
+        if(isBeingHeld) {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.localPosition = new Vector3(mousePos.x - startPosX, mousePos.y - startPosY, 0);
         }
     }
 
-    // tells puppy to snap to a position
-    public void changePos() {
-        // Check if you are leaving a seat
-        if(seat != -1 && didMove) {
+    public void startDrag(Vector3 mousePos) {
+        if(canMove) {
+            isBeingHeld = true;
+            startPosX = mousePos.x - transform.localPosition.x;
+            startPosY = mousePos.y - transform.localPosition.y;
+        }
+    }
+
+    public void endDrag(Vector3 machinePos, string machineName) {
+        previousPos = machinePos;
+        transform.position = previousPos;
+        machine = machineName;
+        if(seat != -1) {
             ChooseSeat.leaveSeat(seat);
             seat = -1;
         }
-        transform.position = moveToPos;
     }
 
-        // Getter & setter functions
-    public void setStartPos(float a, float b) {
-        startPosX = a;
-        startPosY = b;
+    public void sendBack() {
+        transform.position = previousPos;
     }
 
-    public void setMovePos(Vector3 pos) {
-        moveToPos = pos;
-    }
-
-    public void setHeld(bool a) {
-        isBeingHeld = a;
-    }
-
-    public void setMachine(string machine_) {
-        machine = machine_;
-    }
-
+    // Getter & setter functions
     public string getMachine() {
         return machine;
     }
-
+    
     public void setSeat(int i) {
         seat = i;
     }
 
-    public void setMoving() {
-        isMoving = false;
+    public void setPreviousPos(Vector3 pos) {
+        previousPos = pos;
     }
 
-    public bool getMoving() {
-        return isMoving;
+    public bool getMove() {
+        return canMove;
     }
 
     public void setMove() {
-        didMove = true;
+        canMove ^= true;
     }
 }

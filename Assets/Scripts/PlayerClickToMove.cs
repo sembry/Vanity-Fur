@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerClickToMove : MonoBehaviour
 {
     private Vector3 moveToPos;
+    private bool canMove = true;
 
     void Start() {
         moveToPos = transform.position;
@@ -14,8 +15,18 @@ public class PlayerClickToMove : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, moveToPos, 3f * Time.deltaTime);
     }
 
-    // Setter function
-    public void setPos(Vector3 pos) {
-    	moveToPos = pos;
+    // Getter & setter functions
+    public void startMove(Vector3 pos) {
+        if(canMove) {
+    	   moveToPos = pos;
+        }
+    }
+
+    public bool getMove() {
+        return canMove;
+    }
+
+    public void setMove() {
+        canMove ^= true;
     }
 }

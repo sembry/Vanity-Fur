@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Instantiates all the puppy customers
 public class LevelController : MonoBehaviour
 {
     public int secondsBetweenSpawn;
