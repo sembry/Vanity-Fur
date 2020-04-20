@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelController : MonoBehaviour
+public class PuppySpawn : MonoBehaviour
 {
     public int secondsBetweenSpawn;
     private float timer;
