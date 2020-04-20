@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
+    public int secondsBetweenSpawn;
+    private float timer;
     // Start is called before the first frame update
     void Start()
     {
-      GameObject kk = Instantiate(Resources.Load("Westie"), new Vector3(0, 0, 0), Quaternion.identity) as GameObject; 
-      kk.tag = "Puppy";
+        timer = (float)secondsBetweenSpawn;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+      timer -= Time.deltaTime;
+      if(timer <= 0f)
+      {
+        Instantiate(Resources.Load("Westie"), new Vector3(4, -5, 0), Quaternion.identity);
+        timer = (float)secondsBetweenSpawn;
+      }
     }
 }
