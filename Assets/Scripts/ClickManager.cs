@@ -60,23 +60,21 @@ public class ClickManager : MonoBehaviour
                     if(machineLoc.ContainsKey("d" + col.name)) {
                         // If it's not taken
                         if(machineTaken[col.name] == false) {
-                            Debug.Log(col.name);
                             machineTaken[col.name] = true;
                             newMachine = true;
                             if(puppy.GetComponent<PuppyDragAndDrop>().getMachine()) {
-                                // Set previous machine to untaken
-                                if(machineTaken.ContainsKey(puppy.GetComponent<PuppyDragAndDrop>().getMachine().name)) {
-                                    machineTaken[puppy.GetComponent<PuppyDragAndDrop>().getMachine().name] = false;
-                                }
+                                // Set previous machine to untaken and remove puppy from previous machine
+                                machineTaken[puppy.GetComponent<PuppyDragAndDrop>().getMachine().name] = false;
+                                sendToMachine(puppy, puppy.GetComponent<PuppyDragAndDrop>().getMachine(), false);
                             }
-                            // Send the position and machine back to the puppy
+                            // Send the position and machine back to the puppy and the puppy to the machine
                             puppy.GetComponent<PuppyDragAndDrop>().endDrag(machineLoc["d" + col.name], col.gameObject);
+                            sendToMachine(puppy, col.gameObject, true);
                         }
                     }
                 }
                 // Otherwise send the same location back
                 if(!newMachine) {
-                    Debug.Log("snapcback");
                     puppy.GetComponent<PuppyDragAndDrop>().sendBack();
                 }
             }
@@ -104,10 +102,40 @@ public class ClickManager : MonoBehaviour
                 // If you hit a machine, send the position back to the player
                 if(machineLoc.ContainsKey("p" + col.name)) {
                     if(player.GetComponent<PlayerClickToMove>().getMove()) {
+                        // Remove player from previous machine
+                        if(player.GetComponent<PlayerClickToMove>().getMachine()) {
+                            sendToMachine(player, player.GetComponent<PlayerClickToMove>().getMachine(), false);
+                        }
                         player.GetComponent<PlayerClickToMove>().startMove(machineLoc["p" + col.name], col.gameObject);
                     }
                 }
             }
+        }
+    }
+
+    // Sends player and puppy info to a given machine
+    public void sendToMachine(GameObject p, GameObject machine, bool a) {
+        switch(machine.name) {
+            case "Bath":
+                if(a) machine.GetComponent<BathWork>().send(p);
+                else machine.GetComponent<BathWork>().remove(p);
+                break;
+            case "Haircut":
+                if(a) machine.GetComponent<HaircutWork>().send(p);
+                else machine.GetComponent<HaircutWork>().remove(p);
+                break;
+            case "Massage":
+                if(a) machine.GetComponent<MassageWork>().send(p);
+                else machine.GetComponent<MassageWork>().remove(p);
+                break;
+            case "Cash":
+                if(a) machine.GetComponent<CashWork>().send(p);
+                else machine.GetComponent<CashWork>().remove(p);
+                break;
+            case "Treat":
+                if(a) machine.GetComponent<TreatWork>().send(p);
+                else machine.GetComponent<TreatWork>().remove(p);
+                break;
         }
     }
 }
