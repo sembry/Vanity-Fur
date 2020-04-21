@@ -27,7 +27,7 @@ public class MassageWork : MonoBehaviour
 
             // After 5 seconds, they can leave, and unpause happiness
             timer += (Time.deltaTime)%60;
-            if(timer >= 5) {
+            if(timer >= 6) {
                 newCustomer = false;
                 person.GetComponent<PlayerClickToMove>().setMove();
                 if(puppy) {

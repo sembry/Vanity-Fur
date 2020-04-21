@@ -27,7 +27,7 @@ public class CashWork : MonoBehaviour
 
             // After 2 seconds, they can leave
             timer += (Time.deltaTime)%60;
-            if(timer >= 2) {
+            if(timer >= 1) {
                 newCustomer = false;
                 person.GetComponent<PlayerClickToMove>().setMove();
                 if(puppy) {

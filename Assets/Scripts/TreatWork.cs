@@ -25,7 +25,7 @@ public class TreatWork : MonoBehaviour
 
             // After 3 seconds, it can leave, and unpause happiness
             timer += (Time.deltaTime)%60;
-            if(timer >= 3) {
+            if(timer >= 2) {
                 newCustomer = false;
                 if(puppy) {
                     puppy.GetComponent<PuppyDragAndDrop>().setMove();
