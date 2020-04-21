@@ -8,8 +8,6 @@ public class CashWork : MonoBehaviour
     private float timer = 0f;
     private GameObject person;
     private GameObject puppy;
-    // Need to reference the ClickManager when the puppy leaves
-    private GameObject cm;
 
     private bool isPerson = false;
     private bool isPuppy = false;
@@ -33,20 +31,19 @@ public class CashWork : MonoBehaviour
                 person.GetComponent<PlayerClickToMove>().setMove();
                 puppy.GetComponent<PuppyDragAndDrop>().setMove();
                 // After paying, alert the script
-                puppy.GetComponent<PuppyCustomer>().done(cm);
+                puppy.GetComponent<PuppyCustomer>().setPaid();
                 timer = 0f;
             }
         }
     }
 
     // Setter functions
-    public void send(GameObject p, GameObject cm_) {
+    public void send(GameObject p) {
         if(p.tag == "Puppy") {
             newCustomer = true;
             changeMove = false;
             puppy = p;
             isPuppy = true;
-            cm = cm_;
         }
         else {
             person = p;
