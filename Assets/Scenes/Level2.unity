@@ -455,6 +455,7 @@ Transform:
 <<<<<<< HEAD
 =======
 =======
+>>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
 =======
 >>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
 --- !u!1001 &523982285
@@ -543,6 +544,7 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
 =======
 =======
+>>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &547371164 stripped
 MonoBehaviour:
@@ -551,6 +553,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1101924290611786985}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD
+>>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
 =======
 >>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
   m_GameObject: {fileID: 0}
@@ -566,6 +569,7 @@ MonoBehaviour:
 =======
 >>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
 =======
+>>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
 --- !u!1001 &581522886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1949,6 +1953,7 @@ MonoBehaviour:
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
+>>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
 =======
 >>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
 =======
