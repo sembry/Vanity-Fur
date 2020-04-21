@@ -8,7 +8,6 @@ public class PlayerMoney : MonoBehaviour
 
     public void addMoney(int amt) {
     	balance += amt;
-    	GetComponent<HUD>().receiveCash(balance);
     }
 
     public int getBalance() {
