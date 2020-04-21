@@ -43,6 +43,7 @@ public class EnterScene : MonoBehaviour
 
     void finished() {
         script.setMove();
+        GetComponent<PuppyCustomer>().pauseHappiness();
         Destroy(this);
     }
 

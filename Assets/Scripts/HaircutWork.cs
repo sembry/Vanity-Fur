@@ -20,15 +20,17 @@ public class HaircutWork : MonoBehaviour
             if(!changeMove) {
                 person.GetComponent<PlayerClickToMove>().setMove();
                 puppy.GetComponent<PuppyDragAndDrop>().setMove();
+                puppy.GetComponent<PuppyCustomer>().pauseHappiness();
                 changeMove = true;
             }
 
-            // After 5 seconds, they can leave
+            // After 5 seconds, they can leave, and unpause happiness
             timer += (Time.deltaTime)%60;
             if(timer >= 5) {
                 newCustomer = false;
                 person.GetComponent<PlayerClickToMove>().setMove();
                 puppy.GetComponent<PuppyDragAndDrop>().setMove();
+                puppy.GetComponent<PuppyCustomer>().pauseHappiness();
                 // Update puppy's desired stations
                 puppy.GetComponent<PuppyCustomer>().removeStation(2);
                 timer = 0f;

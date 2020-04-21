@@ -59,7 +59,7 @@ public class ClickManager : MonoBehaviour
                     // If you hit a machine
                     if(machineLoc.ContainsKey("d" + col.name)) {
                         // If the machine is desired
-                        if(puppy.GetComponent<PuppyCustomer>().nextStation() == col.name) {
+                        if((puppy.GetComponent<PuppyCustomer>().nextStation() == col.name) || col.name == "Treats") {
                             // If it's not taken
                             if(machineTaken[col.name] == false) {
                                 machineTaken[col.name] = true;
@@ -135,7 +135,7 @@ public class ClickManager : MonoBehaviour
                 if(a) machine.GetComponent<CashWork>().send(p, gameObject);
                 else machine.GetComponent<CashWork>().remove(p);
                 break;
-            case "Treat":
+            case "Treats":
                 if(a) machine.GetComponent<TreatWork>().send(p);
                 else machine.GetComponent<TreatWork>().remove(p);
                 break;

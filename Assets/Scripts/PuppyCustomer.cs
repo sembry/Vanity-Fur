@@ -6,17 +6,62 @@ using UnityEngine;
 public class PuppyCustomer : MonoBehaviour
 {
     private HashSet<int> stations = new HashSet<int>();
+    private Vector3 exitPos = new Vector3(11f, 0f, 0);
+
     private int balance = 0;
     private int stationsWanted;
-    private Vector3 exitPos = new Vector3(11f, 0f, 0);
-    private bool paid = false;
+    private int happiness;
+    private float timer = 0f;
 
+    private bool paid = false;
+    private bool leave = false;
+    private bool pause = true;
+ 
     void Start() {
         // Generate stations desired
         stationsWanted = Random.Range(1,3);
         while (stations.Count < stationsWanted) {
             stations.Add(Random.Range(1,4));
         }
+        // Generate happiness based on dog
+        switch(gameObject.name) {
+            case "Westie(Clone)": happiness = 15; break;
+        }
+    }
+
+    // Leave the scene and destroy self
+    void Update() {
+        // Every second, subtract a happiness
+        if(!pause) {
+            timer += (Time.deltaTime)%60;
+            if(timer >= 1) {
+                happiness--;
+                timer = 0f;
+            }
+        }
+        // Leave after paying
+        if(happiness <= 0 || paid) {
+            if(!leave) {
+                GetComponent<PuppyDragAndDrop>().setMove();
+                leave = true;
+            }
+            if(transform.position.x < exitPos.x) {
+                transform.position = Vector2.MoveTowards(transform.position, exitPos, 3f * Time.deltaTime);
+            }
+            else {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    // When being worked, stop happiness degradation
+    public void pauseHappiness() {
+        pause ^= true;
+    }
+
+    // Used if sent to treat station
+    public void addHappiness() {
+        happiness += 10;
     }
 
     // Return the next station desired
@@ -33,7 +78,10 @@ public class PuppyCustomer : MonoBehaviour
         return "Cash";
     }
 
+    // Add happiness and cash upon finishing a station
     public void removeStation(int i) {
+        happiness += 5;
+        pause = false;
         stations.Remove(i);
         switch(i) {
             case 1: balance += 10; break;
@@ -45,20 +93,8 @@ public class PuppyCustomer : MonoBehaviour
     // Prevent puppy from being picked up and set flag variable
     public void done(GameObject cm) {
         GetComponent<PuppyDragAndDrop>().setMove();
-        paid = true;
         cm.GetComponent<ClickManager>().cashFree();
-    }
-
-    // Leave the scene and destroy self
-    void Update() {
-        if(paid) {
-            if(transform.position.x < exitPos.x) {
-                transform.position = Vector2.MoveTowards(transform.position, exitPos, 3f * Time.deltaTime);
-            }
-            else {
-                Destroy(gameObject);
-            }
-        }
+        paid = true;
     }
 
     // Getter & setter functions
