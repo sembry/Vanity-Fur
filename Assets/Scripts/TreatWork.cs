@@ -17,14 +17,17 @@ public class TreatWork : MonoBehaviour
         if(isPuppy && newCustomer) {
             if(!changeMove) {
                 puppy.GetComponent<PuppyDragAndDrop>().setMove();
+                puppy.GetComponent<PuppyCustomer>().pauseHappiness();
+                puppy.GetComponent<PuppyCustomer>().addHappiness();
                 changeMove = true;
             }
 
-            // After 3 seconds, it can leave
+            // After 3 seconds, it can leave, and unpause happiness
             timer += (Time.deltaTime)%60;
             if(timer >= 3) {
                 newCustomer = false;
                 puppy.GetComponent<PuppyDragAndDrop>().setMove();
+                puppy.GetComponent<PuppyCustomer>().pauseHappiness();
                 timer = 0f;
             }
         }
