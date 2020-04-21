@@ -78,7 +78,9 @@ public class PuppyCustomer : MonoBehaviour
     }
 
     public void changeHappinessBar(int health) {
-        slider.GetComponent<Slider>().value = health;
+    	if(slider) {
+        	slider.GetComponent<Slider>().value = health;
+        }
     }
 
     // When being worked, stop happiness degradation
