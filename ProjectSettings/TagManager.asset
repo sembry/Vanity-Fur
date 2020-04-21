@@ -42,12 +42,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Player
-    uniqueID: 537807067
-    locked: 0
   - name: Puppies
     uniqueID: 1843116003
     locked: 0
   - name: Attributes
     uniqueID: 1126494555
+    locked: 0
+  - name: Player
+    uniqueID: 537807067
     locked: 0

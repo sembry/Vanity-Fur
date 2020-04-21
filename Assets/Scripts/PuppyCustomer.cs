@@ -34,7 +34,9 @@ public class PuppyCustomer : MonoBehaviour
         }
         // Generate happiness based on dog
         switch(gameObject.name) {
-            case "Westie(Clone)": count = 5; break;
+            case "SpottedDog(Clone)": count = 5; break;
+            case "Yorkie(Clone)": count = 10; break;
+            case "Aussie(Clone)": count = 4; break;
         }
     }
 
