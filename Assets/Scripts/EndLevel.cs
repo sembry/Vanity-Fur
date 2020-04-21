@@ -16,22 +16,6 @@ public class EndLevel : MonoBehaviour
     private int targetMoney;
     private int levelNumber;
 
-    // setters for private variables
-    public void setEndMoney(int end)
-    {
-      endMoney = end;
-    }
-
-    public void setTargetMoney(int target)
-    {
-      targetMoney = target;
-    }
-
-    public void setLevelNumber(int level)
-    {
-      levelNumber = level;
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -56,6 +40,23 @@ public class EndLevel : MonoBehaviour
       }
     }
 
+    // setters for private variables
+    public void setEndMoney(int end)
+    {
+      endMoney = end;
+    }
+
+    public void setTargetMoney(int target)
+    {
+      targetMoney = target;
+    }
+
+    public void setLevelNumber(int level)
+    {
+      levelNumber = level;
+    }
+
+    // button functionalities
     void MainMenuOnClick()
     {
       SceneManager.LoadScene(0);

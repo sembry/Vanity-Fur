@@ -9,4 +9,8 @@ public class PlayerMoney : MonoBehaviour
     public void addMoney(int amt) {
     	balance += amt;
     }
+
+    public int getBalance() {
+      return balance;
+    }
 }

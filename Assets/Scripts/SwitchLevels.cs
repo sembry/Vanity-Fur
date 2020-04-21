@@ -8,6 +8,7 @@ public class SwitchLevels : MonoBehaviour
 {
 	public int currentLevel;
 	private float timer;
+	private bool menuCreated = false;
 
     public void onClick() {
     	SceneManager.LoadScene(currentLevel + 1);
@@ -18,6 +19,13 @@ public class SwitchLevels : MonoBehaviour
     	timer += (Time.deltaTime) % 60;
     	if(timer >= 15 + (currentLevel * 15)) {
     		// bring up the menu
+				if(menuCreated == false) {
+					menuCreated = true;
+					GameObject endMenu = (GameObject)Instantiate(Resources.Load("EndPanel"), new Vector3(0, 0, 0), Quaternion.identity);
+					endMenu.GetComponent<EndLevel>().setLevelNumber(currentLevel);
+					endMenu.GetComponent<EndLevel>().setEndMoney(GetComponent<PlayerMoney>().getBalance());
+					// TODO: add the money goal also
+				}
     	}
     }
 }
