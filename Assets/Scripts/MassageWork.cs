@@ -29,6 +29,8 @@ public class MassageWork : MonoBehaviour
                 newCustomer = false;
                 person.GetComponent<PlayerClickToMove>().setMove();
                 puppy.GetComponent<PuppyDragAndDrop>().setMove();
+                // Update puppy's desired stations
+                puppy.GetComponent<PuppyCustomer>().removeStation(3);
                 timer = 0f;
             }
         }

@@ -29,6 +29,8 @@ public class HaircutWork : MonoBehaviour
                 newCustomer = false;
                 person.GetComponent<PlayerClickToMove>().setMove();
                 puppy.GetComponent<PuppyDragAndDrop>().setMove();
+                // Update puppy's desired stations
+                puppy.GetComponent<PuppyCustomer>().removeStation(2);
                 timer = 0f;
             }
         }

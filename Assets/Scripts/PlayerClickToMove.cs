@@ -42,7 +42,7 @@ public class PlayerClickToMove : MonoBehaviour
                 machine.GetComponent<MassageWork>().send(gameObject);
                 break;
             case "Cash":
-                machine.GetComponent<CashWork>().send(gameObject);
+                machine.GetComponent<CashWork>().send(gameObject, null);
                 break;
         }
     }

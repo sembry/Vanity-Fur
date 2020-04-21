@@ -58,18 +58,21 @@ public class ClickManager : MonoBehaviour
                 if(col) {
                     // If you hit a machine
                     if(machineLoc.ContainsKey("d" + col.name)) {
-                        // If it's not taken
-                        if(machineTaken[col.name] == false) {
-                            machineTaken[col.name] = true;
-                            newMachine = true;
-                            if(puppy.GetComponent<PuppyDragAndDrop>().getMachine()) {
-                                // Set previous machine to untaken and remove puppy from previous machine
-                                machineTaken[puppy.GetComponent<PuppyDragAndDrop>().getMachine().name] = false;
-                                sendToMachine(puppy, puppy.GetComponent<PuppyDragAndDrop>().getMachine(), false);
+                        // If the machine is desired
+                        if(puppy.GetComponent<PuppyCustomer>().nextStation() == col.name) {
+                            // If it's not taken
+                            if(machineTaken[col.name] == false) {
+                                machineTaken[col.name] = true;
+                                newMachine = true;
+                                if(puppy.GetComponent<PuppyDragAndDrop>().getMachine()) {
+                                    // Set previous machine to untaken and remove puppy from previous machine
+                                    machineTaken[puppy.GetComponent<PuppyDragAndDrop>().getMachine().name] = false;
+                                    sendToMachine(puppy, puppy.GetComponent<PuppyDragAndDrop>().getMachine(), false);
+                                }
+                                // Send the position and machine back to the puppy and the puppy to the machine
+                                puppy.GetComponent<PuppyDragAndDrop>().endDrag(machineLoc["d" + col.name], col.gameObject);
+                                sendToMachine(puppy, col.gameObject, true);
                             }
-                            // Send the position and machine back to the puppy and the puppy to the machine
-                            puppy.GetComponent<PuppyDragAndDrop>().endDrag(machineLoc["d" + col.name], col.gameObject);
-                            sendToMachine(puppy, col.gameObject, true);
                         }
                     }
                 }
@@ -129,7 +132,7 @@ public class ClickManager : MonoBehaviour
                 else machine.GetComponent<MassageWork>().remove(p);
                 break;
             case "Cash":
-                if(a) machine.GetComponent<CashWork>().send(p);
+                if(a) machine.GetComponent<CashWork>().send(p, gameObject);
                 else machine.GetComponent<CashWork>().remove(p);
                 break;
             case "Treat":
@@ -137,5 +140,10 @@ public class ClickManager : MonoBehaviour
                 else machine.GetComponent<TreatWork>().remove(p);
                 break;
         }
+    }
+
+    // Frees up cash after a puppy has left
+    public void cashFree() {
+        machineTaken["Cash"] = false;
     }
 }
