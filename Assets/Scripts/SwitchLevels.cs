@@ -24,7 +24,7 @@ public class SwitchLevels : MonoBehaviour
 					GameObject endMenu = (GameObject)Instantiate(Resources.Load("EndPanel"), new Vector3(0, 0, 0), Quaternion.identity);
 					endMenu.GetComponent<EndLevel>().setLevelNumber(currentLevel);
 					endMenu.GetComponent<EndLevel>().setEndMoney(GetComponent<PlayerMoney>().getBalance());
-					// TODO: add the money goal also
+					endMenu.GetComponent<EndLevel>().setTargetMoney(10 + 20*currentLevel);
 				}
     	}
     }

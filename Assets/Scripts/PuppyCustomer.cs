@@ -65,7 +65,6 @@ public class PuppyCustomer : MonoBehaviour
                     cm.GetComponent<ClickManager>().freeMachine(GetComponent<PuppyDragAndDrop>().getMachine().name);
                 }
                 else {
-                    Debug.Log(GetComponent<PuppyDragAndDrop>().getSeat());
                     ChooseSeat.leaveSeat(GetComponent<PuppyDragAndDrop>().getSeat());
                 }
                 if(happiness <= 0) {
@@ -82,6 +81,7 @@ public class PuppyCustomer : MonoBehaviour
                 }
             }
             else {
+                Destroy(anger);
                 Destroy(gameObject);
             }
         }

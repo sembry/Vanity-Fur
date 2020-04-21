@@ -21,10 +21,14 @@ public class PuppyDragAndDrop : MonoBehaviour
         // While clicked, puppy, thought, and happiness bar should follow the mouse
         if(isBeingHeld) {
             transform.localPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - startPos;
-            thought.transform.localPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - startPos
-            + new Vector3(0, 1, 0);
-            slider.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) - startPos
-            + new Vector3(0f, -0.72f, 0);
+            if(thought) {
+                thought.transform.localPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - startPos
+                + new Vector3(0, 1, 0);
+            }
+            if(slider) {
+                slider.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) - startPos
+                + new Vector3(0f, -0.72f, 0);
+            }
         }
         // If mouse released, puppy and thought should stop following the mouse
         if(Input.GetMouseButtonUp(0) && isBeingHeld) {
