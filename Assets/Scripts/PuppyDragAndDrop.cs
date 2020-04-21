@@ -17,7 +17,7 @@ public class PuppyDragAndDrop : MonoBehaviour
 
     void Update()
     {
-        // While clicked, follow the mouse
+        // While clicked, puppy and thought should follow the mouse
         if(isBeingHeld) {
             transform.localPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - startPos;
             if(thought) {
@@ -25,7 +25,7 @@ public class PuppyDragAndDrop : MonoBehaviour
                 + new Vector3(0, 1, 0);
             }
         }
-        // If mouse released, stop following the mouse
+        // If mouse released, puppy and thought should stop following the mouse
         if(Input.GetMouseButtonUp(0) && isBeingHeld) {
             isBeingHeld = false;
         }
@@ -37,7 +37,7 @@ public class PuppyDragAndDrop : MonoBehaviour
         startPos = mousePos - transform.localPosition;
     }
 
-    // When drag ends, update variables 
+    // When drag ends, update variables and position
     public void endDrag(Vector3 machinePos, GameObject machine_) {
         isBeingHeld = false;
         previousPos = machinePos;
