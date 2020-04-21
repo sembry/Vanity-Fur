@@ -22,20 +22,32 @@ public class ClickManager : MonoBehaviour
 
         // Populate dictionaries
         machineTaken.Add("Bath", false);
+        machineTaken.Add("Bath2", false);
         machineTaken.Add("Haircut", false);
+        machineTaken.Add("Haircut2", false);
         machineTaken.Add("Massage", false);
+        machineTaken.Add("Massage2", false);
         machineTaken.Add("Cash", false);
         machineTaken.Add("Treats", false);
 
-        machineLoc.Add("pBath", new Vector3(-2.64f, 4.01f, 0));
-        machineLoc.Add("dBath", new Vector3(-4.88f, 4.75f, 0));
-        machineLoc.Add("pHaircut", new Vector3(1.93f, 3.86f, 0));
-        machineLoc.Add("dHaircut", new Vector3(-0.17f, 1.68f, 0));
-        machineLoc.Add("pMassage", new Vector3(7.53f, 3.77f, 0));
-        machineLoc.Add("dMassage", new Vector3(5.5f, 4f, 0));
-        machineLoc.Add("pCash", new Vector3(6.52f, -1.86f, 0));
-        machineLoc.Add("dCash", new Vector3(2.65f, -2.12f, 0));
-        machineLoc.Add("dTreats", new Vector3(-3.59f, -1.7f, 0));
+        machineLoc.Add("pBath", new Vector3(-5f, 4.04f, 0));
+        machineLoc.Add("dBath", new Vector3(-7.37f, 4.01f, 0));
+        machineLoc.Add("pBath2", new Vector3(-5f, 0.88f, 0));
+        machineLoc.Add("dBath2", new Vector3(-7.37f, 1.8f, 0));
+
+        machineLoc.Add("pHaircut", new Vector3(-0.28f, 4.11f, 0));
+        machineLoc.Add("dHaircut", new Vector3(-2.17f, 1.76f, 0));
+        machineLoc.Add("pHaircut2", new Vector3(3.92f, 4.11f, 0));
+        machineLoc.Add("dHaircut2", new Vector3(2.07f, 1.76f, 0));
+
+        machineLoc.Add("pMassage", new Vector3(5.11f, 4.17f, 0));
+        machineLoc.Add("dMassage", new Vector3(7.5f, 4.26f, 0));
+        machineLoc.Add("pMassage2", new Vector3(5.11f, 1.82f, 0));
+        machineLoc.Add("dMassage2", new Vector3(7.5f, 1.82f, 0));
+
+        machineLoc.Add("pCash", new Vector3(8.39f, -1.68f, 0));
+        machineLoc.Add("dCash", new Vector3(4.53f, -2.18f, 0));
+        machineLoc.Add("dTreats", new Vector3(-5.92f, -4.54f, 0));
     } 
 
     void Update()
@@ -59,7 +71,7 @@ public class ClickManager : MonoBehaviour
                     // If you hit a machine
                     if(machineLoc.ContainsKey("d" + col.name)) {
                         // If the machine is desired
-                        if((puppy.GetComponent<PuppyCustomer>().getStation() == col.name) || col.name == "Treats") {
+                        if((puppy.GetComponent<PuppyCustomer>().getStation() == col.tag) || col.tag == "Treats") {
                             // If it's not taken
                             if(machineTaken[col.name] == false) {
                                 machineTaken[col.name] = true;
@@ -118,7 +130,7 @@ public class ClickManager : MonoBehaviour
 
     // Sends player and puppy info to a given machine
     public void sendToMachine(GameObject p, GameObject machine, bool a) {
-        switch(machine.name) {
+        switch(machine.tag) {
             case "Bath":
                 if(a) machine.GetComponent<BathWork>().send(p);
                 else machine.GetComponent<BathWork>().remove(p);

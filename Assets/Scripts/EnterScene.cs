@@ -6,9 +6,9 @@ using UnityEngine;
 public class EnterScene : MonoBehaviour
 {
 	// seat locations
-    private Vector3 seat1 = new Vector3(2.87f, -3.61f, 0f);
-    private Vector3 seat2 = new Vector3(-0.1f, -3.61f, 0f);
-    private Vector3 seat3 = new Vector3(-3.14f, -3.61f, 0f);
+    private Vector3 seat1 = new Vector3(3.13f, -3.95f, 0f);
+    private Vector3 seat2 = new Vector3(0f, -3.95f, 0f);
+    private Vector3 seat3 = new Vector3(-2.86f, -3.95f, 0f);
 
     private Vector3 moveToPos;
     PuppyDragAndDrop script;

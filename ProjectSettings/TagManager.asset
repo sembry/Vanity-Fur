@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Puppy
+  - ShowOnPause
+  - Bath
+  - Massage
+  - Haircut
+  - Treats
+  - Cash
   layers:
   - Default
   - TransparentFX
