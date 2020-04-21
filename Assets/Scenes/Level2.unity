@@ -451,7 +451,10 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
 --- !u!1001 &523982285
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -526,6 +529,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5024709332226506088, guid: 90a01969d976e4728a46a8cb2d2ec314,
     type: 3}
   m_PrefabInstance: {fileID: 523982285}
+<<<<<<< HEAD
   m_PrefabAsset: {fileID: 0}
 >>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
 --- !u!114 &547371164 stripped
@@ -534,6 +538,15 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1101924290611786985}
   m_PrefabAsset: {fileID: 0}
+=======
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &547371164 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1101924291159133301, guid: e501a3b54f2de4469862296405098ad5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1101924290611786985}
+  m_PrefabAsset: {fileID: 0}
+>>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -541,7 +554,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
 --- !u!1001 &581522886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1013,6 +1029,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_GameObject: {fileID: 1216621667}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 6.53, y: -1.54, z: 0}
@@ -1020,6 +1037,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1633780603}
   m_RootOrder: 4
+=======
+  m_GameObject: {fileID: 1633780602}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8870701, y: -0.25715378, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 682467646}
+  - {fileID: 581522887}
+  - {fileID: 523982286}
+  - {fileID: 935852166}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+>>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1216621669
 SpriteRenderer:
@@ -1908,6 +1938,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 459073a28c37f405bb8fe8188fbb4949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
 =======
 >>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
 --- !u!1 &2052257065
