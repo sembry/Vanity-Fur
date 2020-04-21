@@ -12,12 +12,14 @@ public class PuppyCustomer : MonoBehaviour
     private int stationsWanted;
     private int happiness;
     private float timer = 0f;
+    private string station = "";
 
     private bool paid = false;
     private bool leave = false;
     private bool pause = true;
 
     private GameObject cm;
+    private GameObject thought;
  
     void Start() {
         cm = GameObject.Find("ClickManager");
@@ -45,6 +47,7 @@ public class PuppyCustomer : MonoBehaviour
         // Leave after paying or if angry
         if(happiness <= 0 || paid) {
             if(!leave) {
+                Destroy(thought);
                 GetComponent<PuppyDragAndDrop>().setMove();
                 if(GetComponent<PuppyDragAndDrop>().getMachine()) {
                     Debug.Log(GetComponent<PuppyDragAndDrop>().getMachine().name);
@@ -76,17 +79,27 @@ public class PuppyCustomer : MonoBehaviour
     }
 
     // Return the next station desired
-    public string nextStation() {
+    public string getStation() {
         if(stations.Count > 0) {
             foreach(int i in stations) {
                 switch(i) {
-                    case 1: return "Bath";
-                    case 2: return "Haircut";
-                    case 3: return "Massage";
+                    case 1: station = "Bath"; return "Bath";
+                    case 2: station = "Haircut"; return "Haircut";
+                    case 3: station = "Massage"; return "Massage";
                 }
             }
         }
-        return "Cash";
+        station = "Cash"; return "Cash";
+    }
+
+    public void instantiateThought() {
+        thought = (GameObject)Instantiate(Resources.Load(station + " Thought"), new Vector3(transform.position.x, 
+            transform.position.y + 1, 0), Quaternion.identity);
+        GetComponent<PuppyDragAndDrop>().setThought(thought);
+    }
+
+    public void destroyThought() {
+        if(thought) Destroy(thought);
     }
 
     // Add happiness and cash upon finishing a station
@@ -99,6 +112,8 @@ public class PuppyCustomer : MonoBehaviour
             case 2: balance += 7; break;
             case 3: balance += 15; break;
         }
+        getStation();
+        instantiateThought();
     }
 
     // Prevent puppy from being picked up and set flag variable

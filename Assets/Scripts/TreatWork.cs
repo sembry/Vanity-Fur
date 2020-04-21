@@ -19,6 +19,7 @@ public class TreatWork : MonoBehaviour
                 puppy.GetComponent<PuppyDragAndDrop>().setMove();
                 puppy.GetComponent<PuppyCustomer>().pauseHappiness();
                 puppy.GetComponent<PuppyCustomer>().addHappiness();
+                puppy.GetComponent<PuppyCustomer>().destroyThought();
                 changeMove = true;
             }
 
@@ -28,6 +29,7 @@ public class TreatWork : MonoBehaviour
                 newCustomer = false;
                 puppy.GetComponent<PuppyDragAndDrop>().setMove();
                 puppy.GetComponent<PuppyCustomer>().pauseHappiness();
+                puppy.GetComponent<PuppyCustomer>().instantiateThought();
                 timer = 0f;
             }
         }

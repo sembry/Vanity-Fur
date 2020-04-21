@@ -21,6 +21,7 @@ public class CashWork : MonoBehaviour
                 person.GetComponent<PlayerClickToMove>().setMove();
                 puppy.GetComponent<PuppyDragAndDrop>().setMove();
                 puppy.GetComponent<PuppyCustomer>().pauseHappiness();
+                puppy.GetComponent<PuppyCustomer>().destroyThought();
                 changeMove = true;
             }
 
