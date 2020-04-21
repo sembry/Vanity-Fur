@@ -34,9 +34,9 @@ public class PuppyCustomer : MonoBehaviour
         }
         // Generate happiness based on dog
         switch(gameObject.name) {
-            case "SpottedDog(Clone)": count = 5; break;
-            case "Yorkie(Clone)": count = 10; break;
             case "Aussie(Clone)": count = 4; break;
+            case "SpottedDog(Clone)": count = 7; break;
+            case "Yorkie(Clone)": count = 10; break;
         }
     }
 
@@ -78,7 +78,9 @@ public class PuppyCustomer : MonoBehaviour
     }
 
     public void changeHappinessBar(int health) {
-        slider.GetComponent<Slider>().value = health;
+    	if(slider) {
+        	slider.GetComponent<Slider>().value = health;
+        }
     }
 
     // When being worked, stop happiness degradation
@@ -133,9 +135,9 @@ public class PuppyCustomer : MonoBehaviour
         pause = false;
         stations.Remove(i);
         switch(i) {
-            case 1: balance += 10; break;
-            case 2: balance += 7; break;
-            case 3: balance += 15; break;
+            case 1: balance += 7; break;
+            case 2: balance += 11; break;
+            case 3: balance += 17; break;
         }
         getStation();
         instantiateThought();
@@ -144,10 +146,8 @@ public class PuppyCustomer : MonoBehaviour
     // Prevent puppy from being picked up and set flag variable
     public void setPaid() {
         paid = true;
+        GameObject.Find("LevelController").GetComponent<PlayerMoney>().addMoney(balance * 
+            (1 + (happiness/100)));
     }
 
-    // Getter & setter functions
-    public int getBalance() {
-        return balance;
-    }
 }
