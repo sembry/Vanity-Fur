@@ -16,12 +16,13 @@ public class BathWork : MonoBehaviour
 
     void Update() {
         // If puppy and person is there and it hasn't been served yet, prevent them from leaving
-        if(isPerson && isPuppy && newCustomer) {
+        if(isPerson && isPuppy && newCustomer && puppy) {
             if(!changeMove) {
                 person.GetComponent<PlayerClickToMove>().setMove();
                 puppy.GetComponent<PuppyDragAndDrop>().setMove();
                 puppy.GetComponent<PuppyCustomer>().pauseHappiness();
                 puppy.GetComponent<PuppyCustomer>().destroyThought();
+                puppy.GetComponent<PuppyCustomer>().instantiateCloud();
                 changeMove = true;
             }
 
@@ -30,12 +31,11 @@ public class BathWork : MonoBehaviour
             if(timer >= 3) {
                 newCustomer = false;
                 person.GetComponent<PlayerClickToMove>().setMove();
-                if(puppy) {
-                    puppy.GetComponent<PuppyDragAndDrop>().setMove();
-                    puppy.GetComponent<PuppyCustomer>().pauseHappiness();
-                    // Update puppy's desired stations
-                    puppy.GetComponent<PuppyCustomer>().removeStation(1);
-                }
+                puppy.GetComponent<PuppyDragAndDrop>().setMove();
+                puppy.GetComponent<PuppyCustomer>().pauseHappiness();
+                puppy.GetComponent<PuppyCustomer>().destroyCloud();
+                // Update puppy's desired stations
+                puppy.GetComponent<PuppyCustomer>().removeStation(1);
                 timer = 0f;
             }
         }

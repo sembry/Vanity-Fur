@@ -12,8 +12,8 @@ public class LevelController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        secondsBetweenSpawn = 20;
-        timer = 3;
+        secondsBetweenSpawn = 10;
+        timer = 2;
 
         // get which dogs you can spawn
         switch(GetComponent<SwitchLevels>().currentLevel) {
@@ -29,7 +29,7 @@ public class LevelController : MonoBehaviour
     void Update() {
         timer -= (Time.deltaTime) % 60;
         if(timer <= 0f) {
-            int dog = Random.Range(1,3);
+            int dog = Random.Range(1, numberOfDogs);
             switch(dog) {
                 case 1: Instantiate(Resources.Load("Aussie"), new Vector3(4, -5, 0), Quaternion.identity); break;
                 case 2: Instantiate(Resources.Load("SpottedPuppy"), new Vector3(4, -5, 0), Quaternion.identity); break;

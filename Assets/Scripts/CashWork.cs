@@ -16,12 +16,13 @@ public class CashWork : MonoBehaviour
 
     void Update() {
         // If puppy and person is there and it hasn't been served yet, prevent them from leaving
-        if(isPerson && isPuppy && newCustomer) {
+        if(isPerson && isPuppy && newCustomer && puppy) {
             if(!changeMove) {
                 person.GetComponent<PlayerClickToMove>().setMove();
                 puppy.GetComponent<PuppyDragAndDrop>().setMove();
                 puppy.GetComponent<PuppyCustomer>().pauseHappiness();
                 puppy.GetComponent<PuppyCustomer>().destroyThought();
+                puppy.GetComponent<PuppyCustomer>().instantiateCloud();
                 changeMove = true;
             }
 
@@ -30,11 +31,10 @@ public class CashWork : MonoBehaviour
             if(timer >= 1) {
                 newCustomer = false;
                 person.GetComponent<PlayerClickToMove>().setMove();
-                if(puppy) {
-                    puppy.GetComponent<PuppyDragAndDrop>().setMove();
-                    // After paying, alert the script
-                    puppy.GetComponent<PuppyCustomer>().setPaid();
-                }
+                puppy.GetComponent<PuppyDragAndDrop>().setMove();
+                puppy.GetComponent<PuppyCustomer>().destroyCloud();
+                // After paying, alert the script
+                puppy.GetComponent<PuppyCustomer>().setPaid();
                 timer = 0f;
             }
         }

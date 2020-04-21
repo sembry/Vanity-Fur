@@ -24,6 +24,8 @@ public class PuppyCustomer : MonoBehaviour
     private GameObject thought;
     private GameObject slider;
     private GameObject canvas;
+    private GameObject cloud;
+    private GameObject anger;
  
     void Start() {
         cm = GameObject.Find("ClickManager");
@@ -54,7 +56,8 @@ public class PuppyCustomer : MonoBehaviour
         // Leave after paying or if angry
         if(happiness <= 0 || paid) {
             if(!leave) {
-                // Destroy the thought and slider, prevent movemment, and mark the machine/seat as untaken
+                // Destroy the thought and slider, prevent movemment, instantiate the anger thought,
+                // and mark the machine/seat as untaken
                 Destroy(thought);
                 Destroy(slider);
                 GetComponent<PuppyDragAndDrop>().setMove();
@@ -65,11 +68,16 @@ public class PuppyCustomer : MonoBehaviour
                     Debug.Log(GetComponent<PuppyDragAndDrop>().getSeat());
                     ChooseSeat.leaveSeat(GetComponent<PuppyDragAndDrop>().getSeat());
                 }
+                if(happiness <= 0) {
+                    instantiateAnger();
+                }
                 leave = true;
             }
             // Move towards exit and then destroy self
             if(transform.position.x < exitPos.x) {
                 transform.position = Vector2.MoveTowards(transform.position, exitPos, 3f * Time.deltaTime);
+                anger.transform.position = Vector2.MoveTowards(anger.transform.position, new Vector3(exitPos.x, 
+                    exitPos.y + 1, 0), 3f * Time.deltaTime);
             }
             else {
                 Destroy(gameObject);
@@ -114,6 +122,11 @@ public class PuppyCustomer : MonoBehaviour
         GetComponent<PuppyDragAndDrop>().setThought(thought);
     }
 
+    // Destroys current thought
+    public void destroyThought() {
+        if(thought) Destroy(thought);
+    }
+
     // Instantiates the happiness bar
     public void instantiateBar() {
         canvas = GameObject.Find("Happiness Bars");
@@ -123,11 +136,22 @@ public class PuppyCustomer : MonoBehaviour
         GetComponent<PuppyDragAndDrop>().setSlider(slider);
     }
 
-
-    // Destroys current thought
-    public void destroyThought() {
-        if(thought) Destroy(thought);
+    // Instantiates the work done visual
+    public void instantiateCloud() {
+        cloud = (GameObject)Instantiate(Resources.Load("WorkingCloud"), new Vector3(transform.position.x, 
+            transform.position.y, 0), Quaternion.identity);
     }
+
+    // Destroys the work done visual
+    public void destroyCloud() {
+        Destroy(cloud);
+    }
+
+    public void instantiateAnger() {
+        anger = (GameObject)Instantiate(Resources.Load("Angry"), new Vector3(transform.position.x, 
+            transform.position.y + 1, 0), Quaternion.identity);
+    }
+
 
     // Add happiness and cash upon finishing a station
     public void removeStation(int i) {

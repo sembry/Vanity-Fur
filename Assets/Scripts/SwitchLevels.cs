@@ -17,7 +17,7 @@ public class SwitchLevels : MonoBehaviour
     // Keeps track of timer of the level
     void Update() {
     	timer += (Time.deltaTime) % 60;
-    	if(timer >= 15 + (currentLevel * 15)) {
+    	if(timer >= 45 + (currentLevel * 15)) {
     		// bring up the menu
 				if(menuCreated == false) {
 					menuCreated = true;
