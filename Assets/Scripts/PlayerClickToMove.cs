@@ -4,35 +4,18 @@ using UnityEngine;
 
 public class PlayerClickToMove : MonoBehaviour
 {
+    private Vector3 moveToPos;
 
-    float speed = 1.5f;
-    Vector2 target;
-    bool clicked;
-    bool clicked2;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        target = transform.position;
-        clicked = false;
+    void Start() {
+        moveToPos = transform.position;
     }
 
-    void OnMouseDown() {
-        clicked = true;
+    void Update() {
+        transform.position = Vector2.MoveTowards(transform.position, moveToPos, 3f * Time.deltaTime);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetMouseButtonDown(0) && clicked2)
-        {
-            target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            clicked2 = false;
-        }
-        if(clicked) {
-          clicked = false;
-          clicked2 = true;
-        }
-        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+    // Setter function
+    public void setPos(Vector3 pos) {
+    	moveToPos = pos;
     }
 }

@@ -10,6 +10,7 @@ public class PauseMenu : MonoBehaviour
     public Button playButton;
     public Button restartButton;
     public Button mainMenuButton;
+    public AudioSource backgroundAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -35,16 +36,28 @@ public class PauseMenu : MonoBehaviour
           // pause if game is running
           if(!pausePanel.activeInHierarchy)
           {
-            Time.timeScale = 0;
-            pausePanel.SetActive(true);
+            pauseGame();
           }
           // unpause if game is currently paused
           else
           {
-            Time.timeScale = 1;
-            pausePanel.SetActive(false);
+            playGame();
           }
         }
+    }
+
+    void pauseGame()
+    {
+      Time.timeScale = 0;
+      pausePanel.SetActive(true);
+      backgroundAudio.mute = true;
+    }
+
+    void playGame()
+    {
+      Time.timeScale = 1;
+      pausePanel.SetActive(false);
+      backgroundAudio.mute = false;
     }
 
     void PlayOnClick()
@@ -53,8 +66,7 @@ public class PauseMenu : MonoBehaviour
       if(pausePanel.activeInHierarchy)
       {
         // resume game
-        Time.timeScale = 1;
-        pausePanel.SetActive(false);
+        playGame();
       }
     }
 

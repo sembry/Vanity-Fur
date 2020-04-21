@@ -2,64 +2,79 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Handles movement for the puppy
 public class PuppyDragAndDrop : MonoBehaviour
 {
-    bool canMove;
-    bool dragging;
-    Collider2D collider;
-    Vector2 origPos;
-    bool collided;
-    Collision2D obj;
+    private float startPosX;
+    private float startPosY;
+    private bool isBeingHeld = false;
+    private string machine = "";
+    public bool done = false;
+    private int seat;
+    private bool isMoving = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        collider = GetComponent<Collider2D>();
-        canMove = false;
-        dragging = false;
-        origPos = this.transform.position;
-    }
+    private Vector3 seat1 = new Vector3(0f, -3.75f, 0f);
+    private Vector3 seat2 = new Vector3(-1.6f, -3.75f, 0f);
+    private Vector3 seat3 = new Vector3(-3.2f, -3.75f, 0f);
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        collided = true;
-        obj = collision;
-    }
+    public Vector3 moveToPos;
 
-    void OnCollisionExit2D()
-    {
-        collided = false;
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (collider == Physics2D.OverlapPoint(mousePos))
-            {
-                canMove = true;
-            }
-            else
-            {
-                canMove = false;
-            }
-            if (canMove)
-            {
-                dragging = true;
-            }
+        if(Input.GetMouseButtonUp(0) && isBeingHeld) {
+            isBeingHeld = false;
         }
-        if (dragging)
-        {
-            this.transform.position = mousePos;
+        // While clicked, update the position
+        if(isBeingHeld == true) {
+            Vector3 mousePos;
+            mousePos = Input.mousePosition;
+            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+            transform.localPosition = new Vector3(mousePos.x - startPosX, mousePos.y - startPosY, 0);
         }
-        if (Input.GetMouseButtonUp(0))
-        {
-            origPos = this.transform.position;
-            collided = false;
-            canMove = false;
-            dragging = false;
+    }
+
+    // tells puppy to snap to a position
+    public void changePos() {
+        // Check if you are leaving a seat
+        if(seat != -1) {
+            ChooseSeat.leaveSeat(seat);
+            seat = -1;
         }
+        transform.position = moveToPos;
+    }
+
+        // Getter & setter functions
+    public void setStartPos(float a, float b) {
+        startPosX = a;
+        startPosY = b;
+    }
+
+    public void setMovePos(Vector3 pos) {
+        moveToPos = pos;
+    }
+
+    public void setHeld(bool a) {
+        isBeingHeld = a;
+    }
+
+    public void setMachine(string machine_) {
+        machine = machine_;
+    }
+
+    public string getMachine() {
+        return machine;
+    }
+
+    public void setSeat(int i) {
+        seat = i;
+    }
+
+    public void setMoving() {
+        isMoving = false;
+    }
+
+    public bool getMoving() {
+        return isMoving;
     }
 }
