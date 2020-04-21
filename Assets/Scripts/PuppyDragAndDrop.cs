@@ -58,10 +58,14 @@ public class PuppyDragAndDrop : MonoBehaviour
 
     // If dragged to an invalid location, go back to orig location
     public void sendBack() {
-        isBeingHeld = false;
-        transform.position = previousPos;
-        thought.transform.position = previousPos + new Vector3(0, 1, 0);
+      isBeingHeld = false;
+      transform.position = previousPos;
+      if(thought) {
+      thought.transform.position = previousPos + new Vector3(0, 1, 0);
+      }
+      if(slider) {
         slider.transform.position = previousPos + new Vector3(0f, -0.72f, 0);
+      }
     }
 
     // Getter & setter functions
