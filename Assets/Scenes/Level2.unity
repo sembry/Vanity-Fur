@@ -452,6 +452,8 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
 =======
 =======
 >>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
@@ -530,6 +532,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 523982285}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_PrefabAsset: {fileID: 0}
 >>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
 --- !u!114 &547371164 stripped
@@ -539,6 +542,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1101924290611786985}
   m_PrefabAsset: {fileID: 0}
 =======
+=======
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &547371164 stripped
 MonoBehaviour:
@@ -546,6 +550,8 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1101924290611786985}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
+=======
 >>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -555,9 +561,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
+=======
 --- !u!1001 &581522886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1939,6 +1947,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
 =======
 >>>>>>> parent of 2f280e1... fix levels 1 and 2 with prefabs
 =======
