@@ -19,7 +19,6 @@ public class EnterScene : MonoBehaviour
 
         // Check for a seat, and go to it or leave if there's no space
         int check = ChooseSeat.checkSeat();
-        Debug.Log(check);
         switch(check) {
             case 1:
                 moveToPos = seat1;
