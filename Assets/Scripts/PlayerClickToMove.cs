@@ -31,7 +31,7 @@ public class PlayerClickToMove : MonoBehaviour
     }
 
     public void addToMachine() {
-        switch(machine.name) {
+        switch(machine.tag) {
             case "Bath":
                 machine.GetComponent<BathWork>().send(gameObject);
                 break;

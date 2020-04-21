@@ -20,7 +20,12 @@ public class LevelController : MonoBehaviour
       timer -= (Time.deltaTime) % 60;
       if(timer <= 0f)
       {
-        Instantiate(Resources.Load("Westie"), new Vector3(4, -5, 0), Quaternion.identity);
+        int dog = Random.Range(1,3);
+        switch(dog) {
+          case 1: Instantiate(Resources.Load("SpottedPuppy"), new Vector3(4, -5, 0), Quaternion.identity); break;
+          case 2: Instantiate(Resources.Load("Yorkie"), new Vector3(4, -5, 0), Quaternion.identity); break;
+          case 3: Instantiate(Resources.Load("Aussie"), new Vector3(4, -5, 0), Quaternion.identity); break;
+        }
         timer = (float)secondsBetweenSpawn;
       }
     }

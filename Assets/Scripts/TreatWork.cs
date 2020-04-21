@@ -27,9 +27,11 @@ public class TreatWork : MonoBehaviour
             timer += (Time.deltaTime)%60;
             if(timer >= 3) {
                 newCustomer = false;
-                puppy.GetComponent<PuppyDragAndDrop>().setMove();
-                puppy.GetComponent<PuppyCustomer>().pauseHappiness();
-                puppy.GetComponent<PuppyCustomer>().instantiateThought();
+                if(puppy) {
+                    puppy.GetComponent<PuppyDragAndDrop>().setMove();
+                    puppy.GetComponent<PuppyCustomer>().pauseHappiness();
+                    puppy.GetComponent<PuppyCustomer>().instantiateThought();
+                }
                 timer = 0f;
             }
         }

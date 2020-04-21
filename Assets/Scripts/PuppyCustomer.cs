@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Keeps track of money and services desired
 public class PuppyCustomer : MonoBehaviour
@@ -10,7 +11,8 @@ public class PuppyCustomer : MonoBehaviour
 
     private int balance = 0;
     private int stationsWanted;
-    private int happiness;
+    private int happiness = 100;
+    private int count;
     private float timer = 0f;
     private string station = "";
 
@@ -20,6 +22,8 @@ public class PuppyCustomer : MonoBehaviour
 
     private GameObject cm;
     private GameObject thought;
+    private GameObject slider;
+    private GameObject canvas;
  
     void Start() {
         cm = GameObject.Find("ClickManager");
@@ -30,7 +34,9 @@ public class PuppyCustomer : MonoBehaviour
         }
         // Generate happiness based on dog
         switch(gameObject.name) {
-            case "Westie(Clone)": happiness = 15; break;
+            case "SpottedDog(Clone)": count = 5; break;
+            case "Yorkie(Clone)": count = 10; break;
+            case "Aussie(Clone)": count = 4; break;
         }
     }
 
@@ -40,15 +46,17 @@ public class PuppyCustomer : MonoBehaviour
         if(!pause) {
             timer += (Time.deltaTime)%60;
             if(timer >= 1) {
-                happiness--;
+                happiness -= count;
+                changeHappinessBar(happiness);
                 timer = 0f;
             }
         }
         // Leave after paying or if angry
         if(happiness <= 0 || paid) {
             if(!leave) {
-                // Destroy the thought, prevent movemment, and mark the machine/seat as untaken
+                // Destroy the thought and slider, prevent movemment, and mark the machine/seat as untaken
                 Destroy(thought);
+                Destroy(slider);
                 GetComponent<PuppyDragAndDrop>().setMove();
                 if(GetComponent<PuppyDragAndDrop>().getMachine()) {
                     cm.GetComponent<ClickManager>().freeMachine(GetComponent<PuppyDragAndDrop>().getMachine().name);
@@ -69,6 +77,10 @@ public class PuppyCustomer : MonoBehaviour
         }
     }
 
+    public void changeHappinessBar(int health) {
+        slider.GetComponent<Slider>().value = health;
+    }
+
     // When being worked, stop happiness degradation
     public void pauseHappiness() {
         pause ^= true;
@@ -76,7 +88,7 @@ public class PuppyCustomer : MonoBehaviour
 
     // Used if sent to treat station
     public void addHappiness() {
-        happiness += 10;
+        happiness += 40;
     }
 
     // Return the next station desired
@@ -100,6 +112,16 @@ public class PuppyCustomer : MonoBehaviour
         GetComponent<PuppyDragAndDrop>().setThought(thought);
     }
 
+    // Instantiates the happiness bar
+    public void instantiateBar() {
+        canvas = GameObject.Find("Happiness Bars");
+        slider = (GameObject)Instantiate(Resources.Load("Happiness"), transform.position, Quaternion.identity);
+        slider.transform.SetParent(canvas.transform, false);
+        slider.transform.position = transform.position + new Vector3(0f, -0.72f, 0);
+        GetComponent<PuppyDragAndDrop>().setSlider(slider);
+    }
+
+
     // Destroys current thought
     public void destroyThought() {
         if(thought) Destroy(thought);
@@ -107,7 +129,7 @@ public class PuppyCustomer : MonoBehaviour
 
     // Add happiness and cash upon finishing a station
     public void removeStation(int i) {
-        happiness += 5;
+        happiness += 25;
         pause = false;
         stations.Remove(i);
         switch(i) {
