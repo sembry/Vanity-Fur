@@ -44,6 +44,8 @@ public class EnterScene : MonoBehaviour
     void finished() {
         script.setMove();
         GetComponent<PuppyCustomer>().pauseHappiness();
+        GetComponent<PuppyCustomer>().getStation();
+        GetComponent<PuppyCustomer>().instantiateThought();
         Destroy(this);
     }
 

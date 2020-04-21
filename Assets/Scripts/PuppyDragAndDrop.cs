@@ -6,6 +6,7 @@ using UnityEngine;
 public class PuppyDragAndDrop : MonoBehaviour
 {
     private GameObject machine;
+    private GameObject thought;
     private int seat;
 
     private bool isBeingHeld = false;
@@ -19,6 +20,10 @@ public class PuppyDragAndDrop : MonoBehaviour
         // While clicked, follow the mouse
         if(isBeingHeld) {
             transform.localPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - startPos;
+            if(thought) {
+                thought.transform.localPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - startPos
+                + new Vector3(0, 1, 0);
+            }
         }
         // If mouse released, stop following the mouse
         if(Input.GetMouseButtonUp(0) && isBeingHeld) {
@@ -37,6 +42,9 @@ public class PuppyDragAndDrop : MonoBehaviour
         isBeingHeld = false;
         previousPos = machinePos;
         transform.position = previousPos;
+        if(thought) {
+            thought.transform.position = previousPos + new Vector3(0, 1, 0);
+        }
         machine = machine_;
         if(seat != -1) {
             ChooseSeat.leaveSeat(seat);
@@ -48,9 +56,16 @@ public class PuppyDragAndDrop : MonoBehaviour
     public void sendBack() {
         isBeingHeld = false;
         transform.position = previousPos;
+        if(thought) {
+            thought.transform.position = previousPos + new Vector3(0, 1, 0);
+        }
     }
 
     // Getter & setter functions
+    public void setThought(GameObject thought_) {
+        thought = thought_;
+    }
+
     public GameObject getMachine() {
         return machine;
     }
