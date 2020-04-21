@@ -43,6 +43,7 @@ public class EnterScene : MonoBehaviour
 
     void finished() {
         script.setMove();
+        // Unpause happiness loss and instantiate a thought
         GetComponent<PuppyCustomer>().pauseHappiness();
         GetComponent<PuppyCustomer>().getStation();
         GetComponent<PuppyCustomer>().instantiateThought();
