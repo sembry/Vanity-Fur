@@ -30,10 +30,12 @@ public class BathWork : MonoBehaviour
             if(timer >= 5) {
                 newCustomer = false;
                 person.GetComponent<PlayerClickToMove>().setMove();
-                puppy.GetComponent<PuppyDragAndDrop>().setMove();
-                puppy.GetComponent<PuppyCustomer>().pauseHappiness();
-                // Update puppy's desired stations
-                puppy.GetComponent<PuppyCustomer>().removeStation(1);
+                if(puppy) {
+                    puppy.GetComponent<PuppyDragAndDrop>().setMove();
+                    puppy.GetComponent<PuppyCustomer>().pauseHappiness();
+                    // Update puppy's desired stations
+                    puppy.GetComponent<PuppyCustomer>().removeStation(1);
+                }
                 timer = 0f;
             }
         }
