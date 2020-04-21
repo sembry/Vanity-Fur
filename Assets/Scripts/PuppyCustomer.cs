@@ -82,6 +82,7 @@ public class PuppyCustomer : MonoBehaviour
                 }
             }
             else {
+                Destroy(anger);
                 Destroy(gameObject);
             }
         }
