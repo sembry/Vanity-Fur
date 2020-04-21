@@ -34,7 +34,7 @@ public class PuppyDragAndDrop : MonoBehaviour
 
     // When drag ends, update variables 
     public void endDrag(Vector3 machinePos, GameObject machine_) {
-    	isBeingHeld = false;
+        isBeingHeld = false;
         previousPos = machinePos;
         transform.position = previousPos;
         machine = machine_;
@@ -46,13 +46,17 @@ public class PuppyDragAndDrop : MonoBehaviour
 
     // If dragged to an invalid location, go back to orig location
     public void sendBack() {
-    	isBeingHeld = false;
+        isBeingHeld = false;
         transform.position = previousPos;
     }
 
     // Getter & setter functions
     public GameObject getMachine() {
         return machine;
+    }
+
+    public int getSeat() {
+        return seat;
     }
 
     public void setSeat(int i) {
