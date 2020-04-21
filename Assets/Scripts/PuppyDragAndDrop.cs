@@ -47,8 +47,14 @@ public class PuppyDragAndDrop : MonoBehaviour
         isBeingHeld = false;
         previousPos = machinePos;
         transform.position = previousPos;
-        thought.transform.position = previousPos + new Vector3(0, 1, 0);
-        slider.transform.position = previousPos + new Vector3(0f, -0.72f, 0);
+        if(thought) {
+            thought.transform.localPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - startPos
+            + new Vector3(0, 1, 0);
+            }
+        if(slider) {
+            slider.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition) - startPos
+            + new Vector3(0f, -0.72f, 0);
+        }
         machine = machine_;
         if(seat != -1) {
             ChooseSeat.leaveSeat(seat);
