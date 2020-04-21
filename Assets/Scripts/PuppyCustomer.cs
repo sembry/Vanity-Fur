@@ -76,8 +76,10 @@ public class PuppyCustomer : MonoBehaviour
             // Move towards exit and then destroy self
             if(transform.position.x < exitPos.x) {
                 transform.position = Vector2.MoveTowards(transform.position, exitPos, 3f * Time.deltaTime);
-                anger.transform.position = Vector2.MoveTowards(anger.transform.position, new Vector3(exitPos.x, 
-                    exitPos.y + 1, 0), 3f * Time.deltaTime);
+                if(anger) {
+                    anger.transform.position = Vector2.MoveTowards(anger.transform.position, new Vector3(exitPos.x, 
+                        exitPos.y + 1, 0), 3f * Time.deltaTime);
+                }
             }
             else {
                 Destroy(gameObject);
