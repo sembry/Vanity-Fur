@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - ShowOnPause
   - Puppy
   layers:
   - Default
@@ -43,9 +42,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Objects
-    uniqueID: 3543006255
+  - name: Player
+    uniqueID: 537807067
     locked: 0
-  - name: Characters
-    uniqueID: 3163413601
+  - name: Puppies
+    uniqueID: 1843116003
+    locked: 0
+  - name: Attributes
+    uniqueID: 1126494555
     locked: 0

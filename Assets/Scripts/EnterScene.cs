@@ -47,6 +47,7 @@ public class EnterScene : MonoBehaviour
         GetComponent<PuppyCustomer>().pauseHappiness();
         GetComponent<PuppyCustomer>().getStation();
         GetComponent<PuppyCustomer>().instantiateThought();
+        GetComponent<PuppyCustomer>().instantiateBar();
         Destroy(this);
     }
 

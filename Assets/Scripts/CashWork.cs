@@ -30,9 +30,11 @@ public class CashWork : MonoBehaviour
             if(timer >= 2) {
                 newCustomer = false;
                 person.GetComponent<PlayerClickToMove>().setMove();
-                puppy.GetComponent<PuppyDragAndDrop>().setMove();
-                // After paying, alert the script
-                puppy.GetComponent<PuppyCustomer>().setPaid();
+                if(puppy) {
+                    puppy.GetComponent<PuppyDragAndDrop>().setMove();
+                    // After paying, alert the script
+                    puppy.GetComponent<PuppyCustomer>().setPaid();
+                }
                 timer = 0f;
             }
         }
