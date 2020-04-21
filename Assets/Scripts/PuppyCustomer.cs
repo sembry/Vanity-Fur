@@ -6,14 +6,10 @@ using UnityEngine;
 public class PuppyCustomer : MonoBehaviour
 {
     private HashSet<int> stations = new HashSet<int>();
-    private int balance;
+    private int balance = 0;
     private int stationsWanted;
     private Vector3 exitPos = new Vector3(11f, 0f, 0);
     private bool paid = false;
-
-    public PuppyCustomer() {
-        balance = 0;
-    }
 
     void Start() {
         // Generate stations desired
@@ -23,6 +19,7 @@ public class PuppyCustomer : MonoBehaviour
         }
     }
 
+    // Return the next station desired
     public string nextStation() {
         if(stations.Count > 0) {
             foreach(int i in stations) {
@@ -38,9 +35,14 @@ public class PuppyCustomer : MonoBehaviour
 
     public void removeStation(int i) {
         stations.Remove(i);
+        switch(i) {
+            case 1: balance += 10; break;
+            case 2: balance += 7; break;
+            case 3: balance += 15; break;
+        }
     }
 
-    // Prevent puppy from leaving and set flag variable
+    // Prevent puppy from being picked up and set flag variable
     public void done(GameObject cm) {
         GetComponent<PuppyDragAndDrop>().setMove();
         paid = true;
@@ -57,5 +59,10 @@ public class PuppyCustomer : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    // Getter & setter functions
+    public int getBalance() {
+        return balance;
     }
 }
