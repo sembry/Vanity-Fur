@@ -2,25 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Hovering over a button turns it red
 public class MouseHover : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         GetComponent<Renderer>().material.color = Color.black;
     }
 
-    void OnMouseEnter(){
+    void OnMouseEnter() {
         GetComponent<Renderer>().material.color = Color.red;
     }
 
     void OnMouseExit() {
         GetComponent<Renderer>().material.color = Color.black;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+// Handles behavior for the pause menu
 public class PauseMenu : MonoBehaviour
 {
     public GameObject pausePanel;
@@ -12,71 +13,59 @@ public class PauseMenu : MonoBehaviour
     public Button mainMenuButton;
     public AudioSource backgroundAudio;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-      Time.timeScale = 1;
-      pausePanel.SetActive(false);
-      //adding onClick functionality to menu buttons
-      Button play = playButton.GetComponent<Button>();
-      play.onClick.AddListener(PlayOnClick);
+    void Start() {
+        Time.timeScale = 1;
+        pausePanel.SetActive(false);
 
-      Button restart = restartButton.GetComponent<Button>();
-      restart.onClick.AddListener(RestartOnClick);
+        //adding onClick functionality to menu buttons
+        Button play = playButton.GetComponent<Button>();
+        play.onClick.AddListener(PlayOnClick);
 
-      Button mainMenu = mainMenuButton.GetComponent<Button>();
-      mainMenu.onClick.AddListener(MenuOnClick);
+        Button restart = restartButton.GetComponent<Button>();
+        restart.onClick.AddListener(RestartOnClick);
+
+        Button mainMenu = mainMenuButton.GetComponent<Button>();
+        mainMenu.onClick.AddListener(MenuOnClick);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-          // pause if game is running
-          if(!pausePanel.activeInHierarchy)
-          {
-            pauseGame();
-          }
-          // unpause if game is currently paused
-          else
-          {
-            playGame();
-          }
+    void Update() {
+        if(Input.GetKeyDown(KeyCode.P)) {
+            // Pause if game is running
+            if(!pausePanel.activeInHierarchy) {
+                pauseGame();
+            }
+            // Unpause if game is currently paused
+            else {
+                playGame();
+            }
         }
     }
 
-    void pauseGame()
-    {
-      Time.timeScale = 0;
-      pausePanel.SetActive(true);
-      backgroundAudio.mute = true;
+    void pauseGame() {
+        Time.timeScale = 0;
+        pausePanel.SetActive(true);
+        backgroundAudio.mute = true;
     }
 
-    void playGame()
-    {
-      Time.timeScale = 1;
-      pausePanel.SetActive(false);
-      backgroundAudio.mute = false;
+    void playGame() {
+        Time.timeScale = 1;
+        pausePanel.SetActive(false);
+        backgroundAudio.mute = false;
     }
 
-    void PlayOnClick()
-    {
-      // check to ensure pause menu is shown
-      if(pausePanel.activeInHierarchy)
-      {
-        // resume game
-        playGame();
-      }
+    void PlayOnClick() {
+        // Check to ensure pause menu is shown
+        if(pausePanel.activeInHierarchy) {
+            // Resume game
+            playGame();
+        }
     }
 
-    void RestartOnClick()
-    {
-      SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    void RestartOnClick() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    void MenuOnClick()
-    {
-      SceneManager.LoadScene(0);
+    void MenuOnClick() {
+        SceneManager.LoadScene(0);
     }
 }

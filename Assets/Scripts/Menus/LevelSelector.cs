@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
+// Handles the levels selection menu
 public class LevelSelector : MonoBehaviour
 {
     public bool isLevel1;
@@ -18,6 +19,7 @@ public class LevelSelector : MonoBehaviour
         level = GameObject.Find("GameManager").GetComponent<GameManager>().getLevel();
     }
 
+    // If the player has reached the level, load the scene
     void OnMouseUp() {
         if(isLevel1) {
             SceneManager.LoadScene("Level1");
@@ -51,7 +53,8 @@ public class LevelSelector : MonoBehaviour
         level = i;
     }
 
-    public bool isOk() {
+    // Returns whether the player has reached this level
+    public bool reachedLevel() {
         int checkLevel = 0;
         switch(gameObject.name) {
             case "Level1": checkLevel = 1; break;
