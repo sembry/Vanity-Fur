@@ -12,11 +12,14 @@ public class StartMenu : MonoBehaviour
 
     private int levelNumber;
     private string newFeatures = "What's new in this level?";
+    private GameObject levelController;
+
 
     // Start is called before the first frame update
     void Start()
     {
-      levelNumber = GetComponent<SwitchLevels>().getCurrentLevel();
+      levelController = GameObject.Find("LevelController");
+      levelNumber = levelController.GetComponent<SwitchLevels>().getCurrentLevel();
       levelText.text = "Level " + levelNumber;
 
       // Choose text about new features depending on which level
@@ -41,7 +44,7 @@ public class StartMenu : MonoBehaviour
       // Set text to display
       featuresText.text = newFeatures;
 
-      moneyGoalText.text = "Money Goal: " + GetComponent<SwitchLevels>().getGoal();
+      moneyGoalText.text = "Money Goal: " + levelController.GetComponent<SwitchLevels>().getGoal();
 
       Button play = playButton.GetComponent<Button>();
       play.onClick.AddListener(playButtonOnClick);
@@ -50,7 +53,7 @@ public class StartMenu : MonoBehaviour
     void playButtonOnClick()
     {
       // Start level timer and begin spawning puppies
-      GetComponent<SwitchLevels>().startTimer();
-      GetComponent<LevelController>().startSpawn();
+      levelController.GetComponent<SwitchLevels>().startTimer();
+      levelController.GetComponent<LevelController>().startSpawn();
     }
 }
