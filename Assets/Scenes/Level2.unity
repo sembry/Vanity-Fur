@@ -750,6 +750,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Playpen
       objectReference: {fileID: 0}
+    - target: {fileID: 8638512653922394084, guid: 8fa1fd53595474c3fa1a46ba34e4bbf5,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 20.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8638512653922394084, guid: 8fa1fd53595474c3fa1a46ba34e4bbf5,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 20.48
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fa1fd53595474c3fa1a46ba34e4bbf5, type: 3}
 --- !u!4 &660606760 stripped
