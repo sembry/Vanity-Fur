@@ -10,6 +10,9 @@ public class PlayerClickToMove : MonoBehaviour
     private GameObject machine;
     private bool sendToMachine = true;
     private float multiplier = 1;
+    public AudioClip soundFile;
+
+    private bool musicStarted = false;
 
     void Start() {
         moveToPos = transform.position;
@@ -21,10 +24,28 @@ public class PlayerClickToMove : MonoBehaviour
     // Move towards new location
     void Update() {
         transform.position = Vector2.MoveTowards(transform.position, moveToPos, 3f * Time.deltaTime * multiplier);
-        if((transform.position == moveToPos) && !sendToMachine) {
-            sendToMachine = true;
-            addToMachine();
+        if(transform.position == moveToPos) {
+            if(!sendToMachine) {
+                sendToMachine = true;
+                addToMachine();
+                stopMusic();
+                musicStarted = false;
+            }
         }
+        else {
+            if(!musicStarted) {
+                startMusic();
+                musicStarted = true;
+            }
+        }
+    }
+
+    public void startMusic() {
+        GetComponent<AudioSource>().Play();
+    }
+
+    public void stopMusic() {
+        GetComponent<AudioSource>().Stop();
     }
 
     // When move starts, update variables
