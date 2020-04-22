@@ -5,7 +5,9 @@ using UnityEngine;
 // Instantiates all the puppy customers
 public class LevelController : MonoBehaviour
 {
-    public int secondsBetweenSpawn = 0;
+    private int secondsBetweenSpawn = 9;
+    private int maxDogs = 0;
+    private int count = 0;
     private int numberOfDogs;
     private float timer;
     private bool done = false;
@@ -20,11 +22,11 @@ public class LevelController : MonoBehaviour
 
         // get which dogs you can spawn
         switch(GetComponent<SwitchLevels>().currentLevel) {
-            case 1: numberOfDogs = 1; secondsBetweenSpawn = 10; break;
-            case 2: numberOfDogs = 1; secondsBetweenSpawn = 9; break;
-            case 3: numberOfDogs = 2; secondsBetweenSpawn = 8; break;
-            case 4: numberOfDogs = 2; secondsBetweenSpawn = 7; break;
-            case 5: numberOfDogs = 3; secondsBetweenSpawn = 6; break;
+            case 1: numberOfDogs = 1; maxDogs = 6; break;
+            case 2: numberOfDogs = 1; maxDogs = 7; break;
+            case 3: numberOfDogs = 2; maxDogs = 9; break;
+            case 4: numberOfDogs = 2; maxDogs = 10; break;
+            case 5: numberOfDogs = 3; maxDogs = 12; break;
         }
 
         // Find the folder under which puppies should be stored
@@ -35,7 +37,7 @@ public class LevelController : MonoBehaviour
     void Update() {
         if(!done) {
             timer -= (Time.deltaTime) % 60;
-            if(timer <= 0f) {
+            if(timer <= 0f && count < maxDogs) {
                 int dog = Random.Range(1, numberOfDogs + 1);
                 switch(dog) {
                     case 1: puppy = (GameObject)Instantiate(Resources.Load("Puppies/Aussie"), new Vector3(4, -5, 0), Quaternion.identity); break;
@@ -44,6 +46,7 @@ public class LevelController : MonoBehaviour
                 }
                 puppy.transform.SetParent(puppyParent.transform, true);
                 timer = (float)secondsBetweenSpawn;
+                count++;
             }
         }
     }
