@@ -10,7 +10,6 @@ public class PlayerClickToMove : MonoBehaviour
     private GameObject machine;
     private bool sendToMachine = true;
     private float multiplier = 1;
-    public AudioClip soundFile;
 
     private bool musicStarted = false;
 
