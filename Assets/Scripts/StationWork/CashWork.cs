@@ -14,6 +14,8 @@ public class CashWork : MonoBehaviour
     private bool newCustomer = true;
     private bool changeMove = false;
 
+    public AudioClip soundFile;
+
     void Update() {
         // If puppy and person is there and it hasn't been served yet, prevent them from leaving
         if(isPerson && isPuppy && newCustomer && puppy) {
@@ -35,9 +37,15 @@ public class CashWork : MonoBehaviour
                 puppy.GetComponent<PuppyCustomer>().destroyCloud();
                 // After paying, alert the script
                 puppy.GetComponent<PuppyCustomer>().setPaid();
+                // Play the cash sound
+                GetComponent<AudioSource>().PlayOneShot(soundFile, 0.8f);
                 timer = 0f;
             }
         }
+    }
+
+    public void playSound() {
+
     }
 
     // Setter functions
