@@ -11,6 +11,7 @@ public class LevelController : MonoBehaviour
     private int numberOfDogs;
     private float timer;
     private bool done = false;
+    private bool started = false;
 
     private GameObject puppyParent;
     private GameObject puppy;
@@ -35,7 +36,7 @@ public class LevelController : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if(!done) {
+        if(!done && started) {
             timer -= (Time.deltaTime) % 60;
             if(timer <= 0f && count < maxDogs) {
                 int dog = Random.Range(1, numberOfDogs + 1);
@@ -49,6 +50,10 @@ public class LevelController : MonoBehaviour
                 count++;
             }
         }
+    }
+
+    public void startSpawn() {
+        started = true;
     }
 
     public void stopCreating() {

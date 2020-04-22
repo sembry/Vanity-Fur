@@ -13,6 +13,7 @@ public class SwitchLevels : MonoBehaviour
 	private bool menuCreated = false;
     private bool signDone = false;
     private bool puppiesGone = false;
+    private bool started = false;
 
     private GameObject sign;
     private GameObject signParent;
@@ -36,29 +37,31 @@ public class SwitchLevels : MonoBehaviour
 
     // Keeps track of timer of the level
     void Update() {
-    	timer += (Time.deltaTime) % 60;
-    	if(timer >= seconds) {
-    		GetComponent<HUD>().receiveTime(seconds);
-    		seconds++;
-    	}
-    	if(timer >= 45 + (currentLevel * 15)) {
-            // put sign up, stop spawning puppies, and check for no more puppies
-            if(!signDone) {
-                sign = (GameObject)Instantiate(Resources.Load("Closed"), new Vector3(10.61f, -5.15f, 0), Quaternion.identity);
-                sign.transform.SetParent(signParent.transform, true);
-                signDone = true;
-                GetComponent<LevelController>().stopCreating();
-                puppyParent.GetComponent<PuppiesLeft>().noTimeLeft();
-            }
-    		// bring up the menu
-			if(!menuCreated && puppiesGone) {
-				menuCreated = true;
-				GameObject endMenu = (GameObject)Instantiate(Resources.Load("EndPanel"), new Vector3(0, 0, 0), Quaternion.identity);
-				endMenu.GetComponent<EndLevel>().setLevelNumber(currentLevel);
-				endMenu.GetComponent<EndLevel>().setEndMoney(GetComponent<PlayerMoney>().getBalance());
-				endMenu.GetComponent<EndLevel>().setTargetMoney(goal);
-			}
-    	}
+        if(started) {
+        	timer += (Time.deltaTime) % 60;
+        	if(timer >= seconds) {
+        		GetComponent<HUD>().receiveTime(seconds);
+        		seconds++;
+        	}
+        	if(timer >= 45 + (currentLevel * 15)) {
+                // put sign up, stop spawning puppies, and check for no more puppies
+                if(!signDone) {
+                    sign = (GameObject)Instantiate(Resources.Load("Closed"), new Vector3(10.61f, -5.15f, 0), Quaternion.identity);
+                    sign.transform.SetParent(signParent.transform, true);
+                    signDone = true;
+                    GetComponent<LevelController>().stopCreating();
+                    puppyParent.GetComponent<PuppiesLeft>().noTimeLeft();
+                }
+        		// bring up the menu
+    			if(!menuCreated && puppiesGone) {
+    				menuCreated = true;
+    				GameObject endMenu = (GameObject)Instantiate(Resources.Load("EndPanel"), new Vector3(0, 0, 0), Quaternion.identity);
+    				endMenu.GetComponent<EndLevel>().setLevelNumber(currentLevel);
+    				endMenu.GetComponent<EndLevel>().setEndMoney(GetComponent<PlayerMoney>().getBalance());
+    				endMenu.GetComponent<EndLevel>().setTargetMoney(goal);
+    			}
+        	}
+        }
     }
 
     public void noPuppiesLeft() {
@@ -67,5 +70,9 @@ public class SwitchLevels : MonoBehaviour
 
     public int getCurrentLevel() {
     	return currentLevel;
+    }
+
+    public void startTimer() {
+        started = true;
     }
 }
