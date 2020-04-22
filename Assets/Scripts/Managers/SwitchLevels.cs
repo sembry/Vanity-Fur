@@ -75,7 +75,9 @@ public class SwitchLevels : MonoBehaviour
         				endMenu.GetComponent<EndLevel>().setLevelNumber(currentLevel);
         				endMenu.GetComponent<EndLevel>().setEndMoney(GetComponent<PlayerMoney>().getBalance());
         				endMenu.GetComponent<EndLevel>().setTargetMoney(goal);
-                        GameObject.Find("GameManager").GetComponent<GameManager>().updateLevel(currentLevel + 1);
+        				if(GetComponent<PlayerMoney>().getBalance() >= goal) {
+                        	GameObject.Find("GameManager").GetComponent<GameManager>().updateLevel(currentLevel + 1);
+                        }
                     }
     			}
         	}
