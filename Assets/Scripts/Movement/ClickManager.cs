@@ -32,7 +32,7 @@ public class ClickManager : MonoBehaviour
         machineTaken.Add("Playpen", false);
 
         machineLoc.Add("pBath", new Vector3(-5f, 4.04f, 0));
-        machineLoc.Add("dBath", new Vector3(-7.37f, 5.08f, 0));
+        machineLoc.Add("dBath", new Vector3(-7.37f, 4.55f, 0));
         machineLoc.Add("pBath2", new Vector3(-5f, 0.88f, 0));
         machineLoc.Add("dBath2", new Vector3(-7.37f, 1.8f, 0));
 
