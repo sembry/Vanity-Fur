@@ -20,10 +20,11 @@ public class PlayerClickToMove : MonoBehaviour
         }
     }
 
-    // Move towards new location
+    // Move towards new location and handles music and info forwarding
     void Update() {
         transform.position = Vector2.MoveTowards(transform.position, moveToPos, 3f * Time.deltaTime * multiplier);
         if(transform.position == moveToPos) {
+            // If you haven't already told the machine that the person is here, do so and stop the music
             if(!sendToMachine) {
                 sendToMachine = true;
                 addToMachine();
@@ -31,6 +32,7 @@ public class PlayerClickToMove : MonoBehaviour
                 musicStarted = false;
             }
         }
+        // If you're still moving torwards the machine, play the footsteps sound
         else {
             if(!musicStarted) {
                 startMusic();
@@ -54,6 +56,7 @@ public class PlayerClickToMove : MonoBehaviour
         sendToMachine = false;
     }
 
+    // Tell the machine that the player is here
     public void addToMachine() {
         switch(machine.tag) {
             case "Bath":

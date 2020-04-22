@@ -42,7 +42,7 @@ public class PuppyDragAndDrop : MonoBehaviour
         startPos = mousePos - transform.localPosition;
     }
 
-    // When drag ends, update variables and position
+    // When drag ends, update variables and positions
     public void endDrag(Vector3 machinePos, GameObject machine_) {
         isBeingHeld = false;
         previousPos = machinePos;

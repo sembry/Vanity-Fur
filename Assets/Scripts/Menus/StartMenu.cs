@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
+// Handles the menu before a level starts
 public class StartMenu : MonoBehaviour
 {
     public Text levelText;
@@ -14,8 +15,6 @@ public class StartMenu : MonoBehaviour
     private string newFeatures = "What's new in this level?";
     private GameObject levelController;
 
-
-    // Start is called before the first frame update
     void Start()
     {
       levelController = GameObject.Find("LevelController");
