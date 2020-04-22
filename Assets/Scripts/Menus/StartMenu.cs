@@ -34,7 +34,7 @@ public class StartMenu : MonoBehaviour
           newFeatures = "A second haircut station has been built in the spa! You have also bought new shows and now can move 1.5x faster.";
           break;
         case 5:
-          newFeatures = "A second massage station has been build in the spa! Watch out for some bew Yorkie customers, who are the most unpredictable of the customers you will encounter.";
+          newFeatures = "A second massage station has been build in the spa! Watch out for some new Yorkie customers, who are the most unpredictable of the customers you will encounter.";
           break;
       }
 
