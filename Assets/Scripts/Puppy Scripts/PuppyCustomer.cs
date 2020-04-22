@@ -29,7 +29,9 @@ public class PuppyCustomer : MonoBehaviour
     private GameObject anger;
  
     void Start() {
+        // Find GameObjects
         cm = GameObject.Find("ClickManager");
+        attributeParent = GameObject.Find("Effects");
         // Generate stations desired
         stationsWanted = Random.Range(1,4);
         while (stations.Count < stationsWanted) {
@@ -41,8 +43,6 @@ public class PuppyCustomer : MonoBehaviour
             case "SpottedPuppy(Clone)": count = 7; break;
             case "Yorkie(Clone)": count = 10; break;
         }
-        // Find parent of thoughts
-        attributeParent = GameObject.Find("Effects");
     }
 
     // Leave the scene and destroy self
@@ -59,7 +59,7 @@ public class PuppyCustomer : MonoBehaviour
         // Leave after paying or if angry
         if(happiness <= 0 || paid) {
             if(!leave) {
-                // Destroy the thought and slider, prevent movemment, instantiate the anger thought,
+                // Destroy the thought and slider, prevent movement, instantiate the anger thought, 
                 // and mark the machine/seat as untaken
                 Destroy(thought);
                 Destroy(slider);
@@ -75,7 +75,7 @@ public class PuppyCustomer : MonoBehaviour
                 }
                 leave = true;
             }
-            // Move towards exit and then destroy self
+            // Move towards exit and then destroy self and anger bubble
             if(transform.position.x < exitPos.x) {
                 transform.position = Vector2.MoveTowards(transform.position, exitPos, 3f * Time.deltaTime);
                 if(anger) {
@@ -90,13 +90,14 @@ public class PuppyCustomer : MonoBehaviour
         }
     }
 
+    // Used if service delivered
     public void changeHappinessBar(int health) {
         if(slider) {
             slider.GetComponent<Slider>().value = health;
         }
     }
 
-    // When being worked, stop happiness degradation
+    // Used when service is being delivered or when entering the scene
     public void pauseHappiness() {
         pause ^= true;
     }
@@ -118,6 +119,33 @@ public class PuppyCustomer : MonoBehaviour
             }
         }
         station = "Cash"; return "Cash";
+    }
+
+    // Add happiness and cash upon finishing a station, and then get a new station and instantiate a thought
+    public void removeStation(int i) {
+        happiness += 25;
+        pause = false;
+        float multiplier = 0;
+        switch(gameObject.name) {
+            case "Aussie(Clone)": multiplier = 1; break;
+            case "SpottedPuppy(Clone)": multiplier = 1.25f; break;
+            case "Yorkie(Clone)": multiplier = 1.5f; break;
+        }
+        switch(i) {
+            case 1: balance += (int) (7 * multiplier); break;
+            case 2: balance += (int) (11 * multiplier); break;
+            case 3: balance += (int) (17 * multiplier); break;
+        }
+        stations.Remove(i);
+        getStation();
+        instantiateThought();
+    }
+
+    // Prevent puppy from being picked up and set flag variable
+    public void setPaid() {
+        paid = true;
+        GameObject.Find("LevelController").GetComponent<PlayerMoney>().addMoney(balance * 
+            (1 + (happiness/100)));
     }
 
     // Instantiates a new thought based on station desired
@@ -154,32 +182,10 @@ public class PuppyCustomer : MonoBehaviour
         Destroy(cloud);
     }
 
+    // Instantiates the anger thought
     public void instantiateAnger() {
         anger = (GameObject)Instantiate(Resources.Load("Attributes/Angry"), new Vector3(transform.position.x, 
             transform.position.y + 1, 0), Quaternion.identity);
         anger.transform.SetParent(attributeParent.transform, true);
     }
-
-
-    // Add happiness and cash upon finishing a station
-    public void removeStation(int i) {
-        happiness += 25;
-        pause = false;
-        stations.Remove(i);
-        switch(i) {
-            case 1: balance += 7; break;
-            case 2: balance += 11; break;
-            case 3: balance += 17; break;
-        }
-        getStation();
-        instantiateThought();
-    }
-
-    // Prevent puppy from being picked up and set flag variable
-    public void setPaid() {
-        paid = true;
-        GameObject.Find("LevelController").GetComponent<PlayerMoney>().addMoney(balance * 
-            (1 + (happiness/100)));
-    }
-
 }
