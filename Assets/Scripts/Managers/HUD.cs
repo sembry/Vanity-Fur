@@ -24,7 +24,7 @@ public class HUD : MonoBehaviour
             case 5: goal = 160; break;
         }
 
-    	cashDisplay.text = "Cash: $0/" + goal.ToString();
+    	cashDisplay.text = "Cash: $0/$" + goal.ToString();
     }
     
     // Update the time
@@ -34,6 +34,6 @@ public class HUD : MonoBehaviour
 
     // Update the cash
     public void receiveCash(int cash) {
-    	cashDisplay.text = "Cash: $" + cash.ToString() + "/"+ goal.ToString();
+    	cashDisplay.text = "Cash: $" + cash.ToString() + "/$"+ goal.ToString();
     }
 }

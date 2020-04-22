@@ -27,6 +27,8 @@ public class PuppyCustomer : MonoBehaviour
     private GameObject canvas;
     private GameObject cloud;
     private GameObject anger;
+
+    public AudioClip soundFile;
  
     void Start() {
         // Find GameObjects
@@ -43,6 +45,7 @@ public class PuppyCustomer : MonoBehaviour
             case "SpottedPuppy(Clone)": count = 7; break;
             case "Yorkie(Clone)": count = 10; break;
         }
+        GetComponent<AudioSource>().PlayOneShot(soundFile, 0.5f);
     }
 
     // Leave the scene and destroy self
