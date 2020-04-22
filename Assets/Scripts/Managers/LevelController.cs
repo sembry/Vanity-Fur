@@ -6,8 +6,10 @@ using UnityEngine;
 public class LevelController : MonoBehaviour
 {
     public int secondsBetweenSpawn = 0;
-    private float timer;
     private int numberOfDogs;
+    private float timer;
+    private bool done = false;
+
     private GameObject puppyParent;
     private GameObject puppy;
 
@@ -31,16 +33,22 @@ public class LevelController : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        timer -= (Time.deltaTime) % 60;
-        if(timer <= 0f) {
-            int dog = Random.Range(1, numberOfDogs + 1);
-            switch(dog) {
-                case 1: puppy = (GameObject)Instantiate(Resources.Load("Puppies/Aussie"), new Vector3(4, -5, 0), Quaternion.identity); break;
-                case 2: puppy = (GameObject)Instantiate(Resources.Load("Puppies/SpottedPuppy"), new Vector3(4, -5, 0), Quaternion.identity); break;
-                case 3: puppy = (GameObject)Instantiate(Resources.Load("Puppies/Yorkie"), new Vector3(4, -5, 0), Quaternion.identity); break;
+        if(!done) {
+            timer -= (Time.deltaTime) % 60;
+            if(timer <= 0f) {
+                int dog = Random.Range(1, numberOfDogs + 1);
+                switch(dog) {
+                    case 1: puppy = (GameObject)Instantiate(Resources.Load("Puppies/Aussie"), new Vector3(4, -5, 0), Quaternion.identity); break;
+                    case 2: puppy = (GameObject)Instantiate(Resources.Load("Puppies/SpottedPuppy"), new Vector3(4, -5, 0), Quaternion.identity); break;
+                    case 3: puppy = (GameObject)Instantiate(Resources.Load("Puppies/Yorkie"), new Vector3(4, -5, 0), Quaternion.identity); break;
+                }
+                puppy.transform.SetParent(puppyParent.transform, true);
+                timer = (float)secondsBetweenSpawn;
             }
-            puppy.transform.SetParent(puppyParent.transform, true);
-            timer = (float)secondsBetweenSpawn;
         }
+    }
+
+    public void stopCreating() {
+        done = true;
     }
 }
