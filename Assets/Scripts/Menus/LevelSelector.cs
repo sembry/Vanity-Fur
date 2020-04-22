@@ -61,7 +61,7 @@ public class LevelSelector : MonoBehaviour
             case "Level2": checkLevel = 2; break;
             case "Level3": checkLevel = 3; break;
             case "Level4": checkLevel = 4; break;
-            case "Level5": checkLevel = 5; break;
+            case "Level5": checkLevel = 4; break;
         }
         if(checkLevel <= level) {
             return true;
