@@ -18,7 +18,7 @@ public class HUD : MonoBehaviour
 
     	switch(GetComponent<SwitchLevels>().getCurrentLevel()) {
             case 1: goal = 25; break;
-            case 2: goal = 55; break;
+            case 2: goal = 45; break;
             case 3: goal = 80; break;
             case 4: goal = 120; break;
             case 5: goal = 160; break;
