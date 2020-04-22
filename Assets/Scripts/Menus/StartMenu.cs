@@ -55,5 +55,6 @@ public class StartMenu : MonoBehaviour
       // Start level timer and begin spawning puppies
       levelController.GetComponent<SwitchLevels>().startTimer();
       levelController.GetComponent<LevelController>().startSpawn();
+      Destroy(gameObject);
     }
 }
