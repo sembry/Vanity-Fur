@@ -75,4 +75,8 @@ public class SwitchLevels : MonoBehaviour
     public void startTimer() {
         started = true;
     }
+
+		public void getGoal() {
+			return goal;
+		}
 }
