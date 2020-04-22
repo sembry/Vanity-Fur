@@ -9,14 +9,18 @@ public class PlayerClickToMove : MonoBehaviour
     private bool canMove = true;
     private GameObject machine;
     private bool sendToMachine = true;
+    private float multiplier = 1;
 
     void Start() {
         moveToPos = transform.position;
+        if(GameObject.Find("LevelController").GetComponent<SwitchLevels>().getCurrentLevel() >= 4) {
+            multiplier = 1.5f;
+        }
     }
 
     // Move towards new location
     void Update() {
-        transform.position = Vector2.MoveTowards(transform.position, moveToPos, 3f * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, moveToPos, 3f * Time.deltaTime * multiplier);
         if((transform.position == moveToPos) && !sendToMachine) {
             sendToMachine = true;
             addToMachine();
