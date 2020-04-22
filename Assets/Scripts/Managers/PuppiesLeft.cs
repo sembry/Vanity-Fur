@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Tells the SwitchLevels script when all the puppies have left the spa
 public class PuppiesLeft : MonoBehaviour
 {
 	private GameObject level;

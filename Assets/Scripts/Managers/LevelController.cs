@@ -16,12 +16,10 @@ public class LevelController : MonoBehaviour
     private GameObject puppyParent;
     private GameObject puppy;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         timer = 2;
 
-        // get which dogs you can spawn
+        // Get which dogs you can spawn
         switch(GetComponent<SwitchLevels>().currentLevel) {
             case 1: numberOfDogs = 1; maxDogs = 6; break;
             case 2: numberOfDogs = 1; maxDogs = 7; break;
@@ -29,13 +27,11 @@ public class LevelController : MonoBehaviour
             case 4: numberOfDogs = 2; maxDogs = 10; break;
             case 5: numberOfDogs = 3; maxDogs = 12; break;
         }
-
-        // Find the folder under which puppies should be stored
         puppyParent = GameObject.Find("Puppies");
     }
 
-    // Update is called once per frame
     void Update() {
+        // Makes sure beginning scene is closed and that the limit for the level hasn't been reached yet
         if(!done && started) {
             timer -= (Time.deltaTime) % 60;
             if(timer <= 0f && count < maxDogs) {
@@ -45,6 +41,7 @@ public class LevelController : MonoBehaviour
                     case 2: puppy = (GameObject)Instantiate(Resources.Load("Puppies/SpottedPuppy"), new Vector3(4, -5, 0), Quaternion.identity); break;
                     case 3: puppy = (GameObject)Instantiate(Resources.Load("Puppies/Yorkie"), new Vector3(4, -5, 0), Quaternion.identity); break;
                 }
+                // Set the parent
                 puppy.transform.SetParent(puppyParent.transform, true);
                 timer = (float)secondsBetweenSpawn;
                 count++;

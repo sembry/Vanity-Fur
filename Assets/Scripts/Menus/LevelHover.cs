@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Hovering over a button turns it red
-public class MouseHover : MonoBehaviour
+// Validates whether a level has been reached yet, and if so, displaying regular hover functionality
+public class LevelHover : MonoBehaviour
 {
     void Start() {
         GetComponent<Renderer>().material.color = Color.black;
     }
 
     void OnMouseEnter() {
-        GetComponent<Renderer>().material.color = Color.red;
+    	if(GetComponent<LevelSelector>().reachedLevel()) {
+        	GetComponent<Renderer>().material.color = Color.red;
+        }
     }
 
     void OnMouseExit() {
