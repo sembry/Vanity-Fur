@@ -20,6 +20,7 @@ public class TreatWork : MonoBehaviour
                 puppy.GetComponent<PuppyCustomer>().pauseHappiness();
                 puppy.GetComponent<PuppyCustomer>().addHappiness();
                 puppy.GetComponent<PuppyCustomer>().destroyThought();
+                puppy.GetComponent<PuppyCustomer>().instantiateCloud();
                 changeMove = true;
             }
 
@@ -31,6 +32,7 @@ public class TreatWork : MonoBehaviour
                     puppy.GetComponent<PuppyDragAndDrop>().setMove();
                     puppy.GetComponent<PuppyCustomer>().pauseHappiness();
                     puppy.GetComponent<PuppyCustomer>().instantiateThought();
+                    puppy.GetComponent<PuppyCustomer>().destroyCloud();
                 }
                 timer = 0f;
             }
