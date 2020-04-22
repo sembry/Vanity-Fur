@@ -29,7 +29,14 @@ public class SwitchLevels : MonoBehaviour
         }
         signParent = GameObject.Find("Entrance");
         puppyParent = GameObject.Find("Puppies");
+				createStartMenu();
     }
+
+		void createStartMenu()
+		{
+			GameObject startMenu = (GameObject)Instantiate(Resources.Load("StartPanel"), new Vector3(0, 0, 0), Quaternion.identity);
+
+		}
 
     public void onClick() {
     	SceneManager.LoadScene(currentLevel + 1);
@@ -52,7 +59,7 @@ public class SwitchLevels : MonoBehaviour
                     GetComponent<LevelController>().stopCreating();
                     puppyParent.GetComponent<PuppiesLeft>().noTimeLeft();
                 }
-        		// bring up the menu
+        		// bring up the end menu
     			if(!menuCreated && puppiesGone) {
     				menuCreated = true;
     				GameObject endMenu = (GameObject)Instantiate(Resources.Load("EndPanel"), new Vector3(0, 0, 0), Quaternion.identity);
