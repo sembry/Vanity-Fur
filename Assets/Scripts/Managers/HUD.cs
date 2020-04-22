@@ -17,8 +17,8 @@ public class HUD : MonoBehaviour
     	timeDisplay.text = "Time: 0 secs";
 
     	switch(GetComponent<SwitchLevels>().getCurrentLevel()) {
-            case 1: goal = 30; break;
-            case 2: goal = 50; break;
+            case 1: goal = 25; break;
+            case 2: goal = 55; break;
             case 3: goal = 80; break;
             case 4: goal = 120; break;
             case 5: goal = 160; break;
