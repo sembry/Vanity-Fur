@@ -5,7 +5,7 @@ using UnityEngine;
 // Instantiates all the puppy customers
 public class LevelController : MonoBehaviour
 {
-    public int secondsBetweenSpawn;
+    public int secondsBetweenSpawn = 0;
     private float timer;
     private int numberOfDogs;
     private GameObject puppyParent;
@@ -14,18 +14,16 @@ public class LevelController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        secondsBetweenSpawn = 10;
         timer = 2;
 
         // get which dogs you can spawn
         switch(GetComponent<SwitchLevels>().currentLevel) {
-            case 1: numberOfDogs = 1; break;
-            case 2: numberOfDogs = 1; break;
-            case 3: numberOfDogs = 2; break;
-            case 4: numberOfDogs = 2; break;
-            case 5: numberOfDogs = 3; break;
+            case 1: numberOfDogs = 1; secondsBetweenSpawn = 10; break;
+            case 2: numberOfDogs = 1; secondsBetweenSpawn = 9; break;
+            case 3: numberOfDogs = 2; secondsBetweenSpawn = 8; break;
+            case 4: numberOfDogs = 2; secondsBetweenSpawn = 7; break;
+            case 5: numberOfDogs = 3; secondsBetweenSpawn = 6; break;
         }
-        Debug.Log(numberOfDogs);
 
         // Find the folder under which puppies should be stored
         puppyParent = GameObject.Find("Puppies");
