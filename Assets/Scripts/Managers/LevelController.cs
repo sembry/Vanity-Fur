@@ -11,7 +11,7 @@ public class LevelController : MonoBehaviour
     private int numberOfDogs;
     private float timer;
     private bool done = false;
-    private bool started = false;
+    private bool started = true;
 
     private GameObject puppyParent;
     private GameObject puppy;

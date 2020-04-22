@@ -13,7 +13,7 @@ public class SwitchLevels : MonoBehaviour
 	private bool menuCreated = false;
     private bool signDone = false;
     private bool puppiesGone = false;
-    private bool started = false;
+    private bool started = true ;
 
     private GameObject sign;
     private GameObject signParent;
@@ -40,7 +40,7 @@ public class SwitchLevels : MonoBehaviour
         if(started) {
         	timer += (Time.deltaTime) % 60;
         	if(timer >= seconds) {
-        		GetComponent<HUD>().receiveTime(seconds);
+        		GetComponent<HUD>().receiveTime(45 + (currentLevel * 15) - seconds);
         		seconds++;
         	}
         	if(timer >= 45 + (currentLevel * 15)) {
@@ -52,13 +52,14 @@ public class SwitchLevels : MonoBehaviour
                     GetComponent<LevelController>().stopCreating();
                     puppyParent.GetComponent<PuppiesLeft>().noTimeLeft();
                 }
-        		// bring up the menu
+        		// bring up the menu and update GameManager w/ the new level
     			if(!menuCreated && puppiesGone) {
     				menuCreated = true;
     				GameObject endMenu = (GameObject)Instantiate(Resources.Load("EndPanel"), new Vector3(0, 0, 0), Quaternion.identity);
     				endMenu.GetComponent<EndLevel>().setLevelNumber(currentLevel);
     				endMenu.GetComponent<EndLevel>().setEndMoney(GetComponent<PlayerMoney>().getBalance());
     				endMenu.GetComponent<EndLevel>().setTargetMoney(goal);
+                    GameObject.Find("GameManager").GetComponent<GameManager>().updateLevel();
     			}
         	}
         }
