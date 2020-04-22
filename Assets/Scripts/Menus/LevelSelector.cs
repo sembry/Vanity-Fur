@@ -50,4 +50,19 @@ public class LevelSelector : MonoBehaviour
     public void setLevel(int i) {
         level = i;
     }
+
+    public bool isOk() {
+        int checkLevel = 0;
+        switch(gameObject.name) {
+            case "Level1": checkLevel = 1; break;
+            case "Level2": checkLevel = 2; break;
+            case "Level3": checkLevel = 3; break;
+            case "Level4": checkLevel = 4; break;
+            case "Level5": checkLevel = 5; break;
+        }
+        if(checkLevel <= level) {
+            return true;
+        }
+        return false;
+    }
 }
