@@ -76,7 +76,7 @@ public class SwitchLevels : MonoBehaviour
         started = true;
     }
 
-		public void getGoal() {
+		public int getGoal() {
 			return goal;
 		}
 }
