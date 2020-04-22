@@ -13,9 +13,11 @@ public class TreatWork : MonoBehaviour
     private bool changeMove = false;
 
     void Update() {
-    	// If puppy is there and it hasn't already been served, prevent it from moving
+    	// If puppy is there
         if(isPuppy && newCustomer) {
-            if(!changeMove) {
+            // If the puppy is not currently leaving and it hasn't been served yet, prevent it from moving,
+            // pause happiness degradation, and alter attributes
+            if(!puppy.GetComponent<PuppyCustomer>().puppyLeaving() && !changeMove) {
                 puppy.GetComponent<PuppyDragAndDrop>().setMove();
                 puppy.GetComponent<PuppyCustomer>().pauseHappiness();
                 puppy.GetComponent<PuppyCustomer>().addHappiness();
@@ -23,8 +25,7 @@ public class TreatWork : MonoBehaviour
                 puppy.GetComponent<PuppyCustomer>().instantiateCloud();
                 changeMove = true;
             }
-
-            // After 3 seconds, it can leave, and unpause happiness
+            // After 2 seconds, it can leave, and unpause happiness
             timer += (Time.deltaTime)%60;
             if(timer >= 2) {
                 newCustomer = false;
