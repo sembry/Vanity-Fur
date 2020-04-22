@@ -191,4 +191,9 @@ public class PuppyCustomer : MonoBehaviour
             transform.position.y + 1, 0), Quaternion.identity);
         anger.transform.SetParent(attributeParent.transform, true);
     }
+
+    // Getter function
+    public bool puppyLeaving() {
+        return (happiness <= 0);
+    }
 }

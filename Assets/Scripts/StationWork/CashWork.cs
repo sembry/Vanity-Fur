@@ -27,18 +27,24 @@ public class CashWork : MonoBehaviour
                 puppy.GetComponent<PuppyCustomer>().instantiateCloud();
                 changeMove = true;
             }
-
-            // After 2 seconds, they can leave
-            timer += (Time.deltaTime)%60;
-            if(timer >= 1) {
+            if(!puppy.GetComponent<PuppyCustomer>().puppyLeaving()) {
+                // After 2 seconds, they can leave
+                timer += (Time.deltaTime)%60;
+                if(timer >= 1) {
+                    newCustomer = false;
+                    person.GetComponent<PlayerClickToMove>().setMove();
+                    puppy.GetComponent<PuppyDragAndDrop>().setMove();
+                    puppy.GetComponent<PuppyCustomer>().destroyCloud();
+                    // After paying, alert the script
+                    puppy.GetComponent<PuppyCustomer>().setPaid();
+                    // Play the cash sound
+                    GetComponent<AudioSource>().PlayOneShot(soundFile, 0.8f);
+                    timer = 0f;
+                }
+            }
+            else {
                 newCustomer = false;
                 person.GetComponent<PlayerClickToMove>().setMove();
-                puppy.GetComponent<PuppyDragAndDrop>().setMove();
-                puppy.GetComponent<PuppyCustomer>().destroyCloud();
-                // After paying, alert the script
-                puppy.GetComponent<PuppyCustomer>().setPaid();
-                // Play the cash sound
-                GetComponent<AudioSource>().PlayOneShot(soundFile, 0.8f);
                 timer = 0f;
             }
         }
