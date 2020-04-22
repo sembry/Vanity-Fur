@@ -30,7 +30,12 @@ public class HUD : MonoBehaviour
     
     // Update the time
     public void receiveTime(int secs) {
-    	timeDisplay.text = "Time: " + secs.ToString() + " secs";
+        if(secs >= 0) {
+    	   timeDisplay.text = "Time: " + secs.ToString() + " secs";
+        }
+        else {
+            timeDisplay.text = "Shop is closed!";
+        }
     }
 
     // Update the cash

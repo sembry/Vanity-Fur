@@ -64,12 +64,19 @@ public class SwitchLevels : MonoBehaviour
                 }
         		// Bring up the menu and update GameManager w/ the new level
     			if(!menuCreated && puppiesGone) {
-    				menuCreated = true;
-    				GameObject endMenu = (GameObject)Instantiate(Resources.Load("EndPanel"), new Vector3(0, 0, 0), Quaternion.identity);
-    				endMenu.GetComponent<EndLevel>().setLevelNumber(currentLevel);
-    				endMenu.GetComponent<EndLevel>().setEndMoney(GetComponent<PlayerMoney>().getBalance());
-    				endMenu.GetComponent<EndLevel>().setTargetMoney(goal);
-                    GameObject.Find("GameManager").GetComponent<GameManager>().updateLevel();
+                    menuCreated = true;
+                    if((currentLevel == 5) && (GetComponent<PlayerMoney>().getBalance() >= goal)) {
+                        GameObject endMenu = (GameObject)Instantiate(Resources.Load("LastPanel"), new Vector3(0, 0, 0), 
+                            Quaternion.identity);
+                    }
+                    else {
+        				GameObject endMenu = (GameObject)Instantiate(Resources.Load("EndPanel"), new Vector3(0, 0, 0), 
+                            Quaternion.identity);
+        				endMenu.GetComponent<EndLevel>().setLevelNumber(currentLevel);
+        				endMenu.GetComponent<EndLevel>().setEndMoney(GetComponent<PlayerMoney>().getBalance());
+        				endMenu.GetComponent<EndLevel>().setTargetMoney(goal);
+                        GameObject.Find("GameManager").GetComponent<GameManager>().updateLevel(currentLevel + 1);
+                    }
     			}
         	}
         }

@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     	return level;
     }
     
-    public void updateLevel() {
-    	level++;
+    public void updateLevel(int newLevel) {
+    	level = newLevel;
     }
 }
