@@ -13,13 +13,14 @@ public class SwitchLevels : MonoBehaviour
 	private bool menuCreated = false;
     private bool signDone = false;
     private bool puppiesGone = false;
-    private bool started = true ;
+    private bool started = false;
 
     private GameObject sign;
     private GameObject signParent;
     private GameObject puppyParent;
 
     void Start() {
+        // Decide the money goal for the level
         switch(currentLevel) {
             case 1: goal = 25; break;
             case 2: goal = 45; break;
@@ -35,24 +36,26 @@ public class SwitchLevels : MonoBehaviour
     	SceneManager.LoadScene(currentLevel + 1);
     }
 
-    // Keeps track of timer of the level
     void Update() {
+        // Makes sure that the beginning menu has been closed
         if(started) {
         	timer += (Time.deltaTime) % 60;
         	if(timer >= seconds) {
+                // Sends the time to the HUD
         		GetComponent<HUD>().receiveTime(45 + (currentLevel * 15) - seconds);
         		seconds++;
         	}
         	if(timer >= 45 + (currentLevel * 15)) {
-                // put sign up, stop spawning puppies, and check for no more puppies
+                // Put sign up, stop spawning puppies, and check for no more puppies
                 if(!signDone) {
-                    sign = (GameObject)Instantiate(Resources.Load("Closed"), new Vector3(10.61f, -5.15f, 0), Quaternion.identity);
+                    sign = (GameObject)Instantiate(Resources.Load("Closed"), new Vector3(10.61f, -5.15f, 0), 
+                        Quaternion.identity);
                     sign.transform.SetParent(signParent.transform, true);
                     signDone = true;
                     GetComponent<LevelController>().stopCreating();
                     puppyParent.GetComponent<PuppiesLeft>().noTimeLeft();
                 }
-        		// bring up the menu and update GameManager w/ the new level
+        		// Bring up the menu and update GameManager w/ the new level
     			if(!menuCreated && puppiesGone) {
     				menuCreated = true;
     				GameObject endMenu = (GameObject)Instantiate(Resources.Load("EndPanel"), new Vector3(0, 0, 0), Quaternion.identity);

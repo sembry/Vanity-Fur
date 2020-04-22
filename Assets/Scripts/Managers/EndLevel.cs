@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+// Handles menu at the end of level
 public class EndLevel : MonoBehaviour
 {
     public Button mainMenuButton;
@@ -16,7 +17,7 @@ public class EndLevel : MonoBehaviour
     private int targetMoney;
     private int levelNumber;
 
-    // Start is called before the first frame update
+    // Get variables and start the buttons
     void Start() {
         level.text = "Level " + levelNumber;
         endMoneyText.text = "Earnings: $" + endMoney;
@@ -26,7 +27,8 @@ public class EndLevel : MonoBehaviour
         mainMenu.onClick.AddListener(MainMenuOnClick);
 
         Button levelButton = nextLevelButton.GetComponent<Button>();
-        // change next level button depending on if you completed the level or not
+
+        // Change next level button depending on if you completed the level or not
         if(endMoney < targetMoney) {
             levelButton.GetComponentInChildren<Text>().text = "Restart Level";
             levelButton.onClick.AddListener(RestartOnClick);
@@ -37,7 +39,7 @@ public class EndLevel : MonoBehaviour
         }
     }
 
-    // setters for private variables
+    // Setter functions
     public void setEndMoney(int end) {
         endMoney = end;
     }
@@ -50,7 +52,7 @@ public class EndLevel : MonoBehaviour
         levelNumber = level;
     }
 
-    // button functionalities
+    // Button functionalities
     void MainMenuOnClick() {
         SceneManager.LoadScene(0);
     }

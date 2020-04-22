@@ -16,6 +16,7 @@ public class HUD : MonoBehaviour
     	levelDisplay.text = "Level: " + GetComponent<SwitchLevels>().getCurrentLevel().ToString();
     	timeDisplay.text = "Time: 0 secs";
 
+        // Decides the money goal
     	switch(GetComponent<SwitchLevels>().getCurrentLevel()) {
             case 1: goal = 25; break;
             case 2: goal = 45; break;
@@ -23,7 +24,7 @@ public class HUD : MonoBehaviour
             case 4: goal = 120; break;
             case 5: goal = 160; break;
         }
-
+        
     	cashDisplay.text = "Cash: $0/$" + goal.ToString();
     }
     
