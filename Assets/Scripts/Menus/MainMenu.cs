@@ -12,11 +12,11 @@ public class MainMenu : MonoBehaviour
   void OnMouseUp(){
     if(isInstructions)
     {
-      SceneManager.LoadScene(1);
+      SceneManager.LoadScene("Instructions");
     }
   	if(isPlay)
   	{
-  		SceneManager.LoadScene(2);
+  		SceneManager.LoadScene("LevelSelector");
   	}
   	if(isQuit)
   	{

@@ -3,10 +3,20 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class Instructions : MonoBehaviour
-{
+public class Instructions : MonoBehaviour {
+
+    public bool isQuit;
+    public bool isPlay;
+
     void OnMouseUp()
     {
-      SceneManager.LoadScene(0);
+      if(isQuit)
+      {
+        SceneManager.LoadScene("MainMenu");
+      }
+      if(isPlay)
+      {
+        SceneManager.LoadScene("LevelSelector");
+      }
     }
 }
