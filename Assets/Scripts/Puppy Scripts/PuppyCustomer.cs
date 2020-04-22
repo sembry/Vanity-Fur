@@ -45,6 +45,7 @@ public class PuppyCustomer : MonoBehaviour
             case "SpottedPuppy(Clone)": count = 7; break;
             case "Yorkie(Clone)": count = 10; break;
         }
+        // Play the doorbell noise
         GetComponent<AudioSource>().PlayOneShot(soundFile, 0.5f);
     }
 
@@ -129,6 +130,7 @@ public class PuppyCustomer : MonoBehaviour
         happiness += 25;
         pause = false;
         float multiplier = 0;
+        // Calculate the cost depending on dog and machine
         switch(gameObject.name) {
             case "Aussie(Clone)": multiplier = 1; break;
             case "SpottedPuppy(Clone)": multiplier = 1.25f; break;

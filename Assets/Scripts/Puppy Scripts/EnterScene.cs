@@ -9,9 +9,9 @@ public class EnterScene : MonoBehaviour
     private Vector3 seat1 = new Vector3(3.13f, -3.95f, 0f);
     private Vector3 seat2 = new Vector3(0f, -3.95f, 0f);
     private Vector3 seat3 = new Vector3(-2.86f, -3.95f, 0f);
-
     private Vector3 moveToPos;
-    PuppyDragAndDrop script;
+
+    private PuppyDragAndDrop script;
 
     void Start() {
         transform.position = new Vector3(10f, -3.75f, 0);
@@ -43,7 +43,7 @@ public class EnterScene : MonoBehaviour
 
     void finished() {
         script.setMove();
-        // Unpause happiness loss and instantiate a thought
+        // Unpause happiness loss and instantiate a thought and happiness bar
         GetComponent<PuppyCustomer>().pauseHappiness();
         GetComponent<PuppyCustomer>().getStation();
         GetComponent<PuppyCustomer>().instantiateThought();
