@@ -29,6 +29,7 @@ public class ClickManager : MonoBehaviour
         machineTaken.Add("Massage2", false);
         machineTaken.Add("Cash", false);
         machineTaken.Add("Treats", false);
+        machineTaken.Add("Playpen", false);
 
         machineLoc.Add("pBath", new Vector3(-5f, 4.04f, 0));
         machineLoc.Add("dBath", new Vector3(-7.37f, 5.08f, 0));
@@ -48,6 +49,7 @@ public class ClickManager : MonoBehaviour
         machineLoc.Add("pCash", new Vector3(8.39f, -1.68f, 0));
         machineLoc.Add("dCash", new Vector3(4.53f, -2.18f, 0));
         machineLoc.Add("dTreats", new Vector3(-5.92f, -4.54f, 0));
+        machineLoc.Add("dPlaypen", new Vector3(2.25f, -0.42f, 0));
     } 
 
     void Update()
@@ -71,7 +73,8 @@ public class ClickManager : MonoBehaviour
                     // If you hit a machine
                     if(machineLoc.ContainsKey("d" + col.name)) {
                         // If the machine is desired
-                        if((puppy.GetComponent<PuppyCustomer>().getStation() == col.tag) || col.tag == "Treats") {
+                        if((puppy.GetComponent<PuppyCustomer>().getStation() == col.tag) || col.tag == "Treats" 
+                            || col.tag == "Playpen") {
                             // If it's not taken
                             if(machineTaken[col.name] == false) {
                                 machineTaken[col.name] = true;

@@ -11,6 +11,7 @@ TagManager:
   - Haircut
   - Treats
   - Cash
+  - Playpen
   layers:
   - Default
   - TransparentFX
